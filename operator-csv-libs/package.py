@@ -14,50 +14,82 @@ PACKAGE_FILE_FORMAT = {
     'packageName': ''
 }
 
-def create_or_update_package(path, operator, channel, release, majorminor, default_channel, log):
-    """ Crate or update a channel for a package. Creates the package file if it doesn't exist
+class Package:
 
-    Args:
-        path (string): Path of the operator manifests
-        operator (string): Name of the oooperator
-        channel (string): Partial channel name to add the CSV to (typically {candidate,fast,stable}). Does not require full name
-        release (string): Release version. (i.e. 2.0.0)
-        majorminor (string): Major, Minor version (i.e. 2.0)
-        default_channel (string): Default channel when creating new package manifest
-        log ([type]): [description]
+    PACKAGE_FILE_FORMAT = {
+        'channels': [],
+        'defaultChannel': '{}-{}',
+        'packageName': ''
+    }
 
-    Returns:
-        [bool]: Whether package was successfully created or updated
-    """
-    package_file = '{}/{}.package.yaml'.format(path, operator)
-    # If package file doesn't exist, we'll create it
-    if not os.path.isfile(package_file):
-        log.info('Did not find package info, starting from blank template')
-        package=PACKAGE_FILE_FORMAT
+    def __init__(self, package=None, operator=None, default_channel=None):
+        if package is not None:
+            self.operator = package['packageName']
+            self.channels = []
+            self.default_channel = package['defaultChannel']
+            for c in package['channels']:
+                ch = Channel(c['name'], c['currentCSV'])
+                self.channels.append(ch)
+        elif operator is not None and default_channel is not None:
+            self.operator = operator
+            self.default_channel = default_channel
+            self.channels = []
+        else:
+            self.channels = []
+            self.operator = ''
+            self.default_channel = ''
 
-        # Update the major-minor channel name
-        for c in package['channels']:
-            c['name'] = c['name'].format(majorminor)
-        package['defaultChannel'] = package['defaultChannel'].format(majorminor, default_channel)
+    def __str__(self):
+        return 'Package class for {} operator'.format(self.operator)
+    
+    def get_channel(self, name):
+        for c in self.channels:
+            if c.get_name() == name:
+                return c
+    
+    def get_channels(self):
+        channels = []
+        for c in self.channels:
+            channels.append(c)
+        return channels
+        
+    def create_channel(self, name, current_csv, default=False):
+        ch = Channel(name, current_csv)
+        self.channels.append(ch)
+        if default:
+            self.default_channel = name
 
-        package['packageName'] = operator
+    def get_formatted(self):
+        f = self.PACKAGE_FILE_FORMAT
+        f['packageName'] = self.operator
+        f['defaultChannel'] = self.default_channel
+        f['channels'] = []
+        for c in self.channels:
+            f['channels'].append({'name': c.get_name(), 'currentCSV': c.get_current_csv()})
+        return f
 
-        # Since no channels are populated we need to populate them all
-        for c in package['channels']:
-            c['currentCSV'] = '{}.v{}'.format(operator,release)
-    else:
-        log.info('Reading current package info from {}'.format(package_file))
-        with open(package_file, 'r') as stream:
-            package = yaml.load(stream, Loader=yaml.SafeLoader)
+    def set_default_channel(self, default_channel):
+        self.default_channel = default_channel
 
-    # Update the latest CSV in the given channel
-    for c in package['channels']:
-        if channel in c['name']:
-            log.info('Updating {} currentCSV to {}'.format(c['name'], '{}.v{}'.format(operator,release)))
-            c['currentCSV'] = '{}.v{}'.format(operator,release)
+    def set_operator(self, operator):
+        self.operator = operator
 
-    log.info('Wrinting out package file {}'.format(package_file))
-    with open(package_file, 'w+') as f:
-            yaml.dump(package, f, explicit_start=False, default_flow_style = False)
+    def update_channel(self, channel, new_csv):
+        for c in self.channels:
+            if c.get_name() == channel:
+                c.set_current_csv(new_csv)
 
-    return True
+
+class Channel:
+    def __init__(self, name, currentCSV):
+        self.name = name
+        self.currentCSV = currentCSV
+    
+    def get_current_csv(self):
+        return self.currentCSV
+    def set_current_csv(self, new_csv):
+        self.currentCSV = new_csv
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name

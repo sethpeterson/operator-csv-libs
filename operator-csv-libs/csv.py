@@ -169,8 +169,10 @@ class ClusterServiceVersion:
         self.csv['spec']['version'] = self.version
         self.csv['metadata']['name'] = self.versioned_name
         if len(self.versioned_name) > 63:
-            self.log.warning('{} is longer than 63 characters, and may lead to problems'.format(self.name))
-        
+            if hasattr(self, 'log'):
+                # Fixing a weird issue where the logger is not available when we are constructing a csv object. I even tried switching the
+                # order of parameters when creating the csv object in create-release.py
+                self.log.warning('{} is longer than 63 characters, and may lead to problems'.format(self.name))
         if self.skiprange:
             self.csv['metadata']['annotations']['olm.skipRange'] = self.skiprange
         if self.replaces:
