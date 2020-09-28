@@ -80,7 +80,7 @@ class Package:
                 c.set_current_csv(new_csv)
 
     def promote_channel(self, promote_from, promote_to):
-        update_channel(promote_to, self.get_channel(promote_from).get_current_csv())
+        self.update_channel(promote_to, self.get_channel(promote_from).get_current_csv())
 
 class Channel:
     def __init__(self, name, currentCSV):
