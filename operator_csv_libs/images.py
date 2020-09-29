@@ -4,7 +4,7 @@ class Image:
 
         Keyword Arguments:
             image {string}      -- Image 
-            name {string}       -- Name as identified in spec.relatedImages or olm.relatedImage annotatoin
+            name {string}       -- Name as identified in spec.relatedImages or olm.relatedImage annotation
             deployment {string} -- Name of deployment(default: {None})
             container {string}  -- Name of container (default: {None})
                 

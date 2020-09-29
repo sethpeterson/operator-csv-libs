@@ -1,6 +1,6 @@
 from .images import Image
 from artifactory import ArtifactoryPath
-import os, sys
+import os, sys, json
 import requests
 
 class ImageRepo:
@@ -22,8 +22,18 @@ class ImageRepo:
     def get_manifest_list_digest(self):
         return self.image_repo.get_manifest_list_digest()
 
+
     def get_image_digest(self):
         return self.image_repo.get_image_digest()
+
+    def get_raw_manifest_list(self):
+        """Return the docker manifest list in json format
+        Raises:
+            ManifestListNotFound: [description]
+        Returns:
+            DICT: manifest.list.json content
+        """
+        return self.image_repo.get_raw_manifest_list()
 
 
 class ArtifactoryRepo:
@@ -34,7 +44,7 @@ class ArtifactoryRepo:
 
     def __init__(self, image, artifactory_base=None, artifactory_user=None, artifactory_key=None, logger=None):
         self.image = image
-        
+
         # Always give provided credential preference
         if artifactory_user:
             self.artifactory_user = artifactory_user
@@ -47,7 +57,7 @@ class ArtifactoryRepo:
         else:
             # This is where we should panic and throw some orderly exception
             raise MissingCredentials("No artifactory user provided or found in ARTIFACTORY_USER environment variable")
-        
+
         if artifactory_key:
             self.artifactory_key = artifactory_key
         elif self._artifactory_key:
@@ -78,11 +88,11 @@ class ArtifactoryRepo:
         # For artifactory we need to massage the repo string a bit
         ### Split out all directories after artifactory.com/
         p = '/'.join(self.image.get_image_repo().split('/')[1:])
-        ### Split out the first part of repo.artifactory.com 
+        ### Split out the first part of repo.artifactory.com
         r = self.image.get_image_repo().split('.')[0]
         return '{}/{}'.format(r, p)
 
-    
+
     def _get_raw_image_digest(self):
         manifestpath = '/'.join([
                         self.artifactory_base,
@@ -118,6 +128,31 @@ class ArtifactoryRepo:
         except FileNotFoundError as e:
             raise ManifestListNotFound(e)
 
+    def get_raw_manifest_list(self):
+        """Return the docker manifest list in json format
+        Raises:
+            ManifestListNotFound: [description]
+        Returns:
+            DICT: manifest.list.json content
+        """
+
+        listpath = '/'.join([
+                        self.artifactory_base,
+                        self._get_artifactory_repo(), # We have to massage the repo for artifactory
+                        self.image.get_image_name(),
+                        self.image.get_tag(),
+                        "list.manifest.json"
+                    ])
+        list_path = ArtifactoryPath(listpath, auth=(self.artifactory_user, self.artifactory_key))
+
+        try:
+            f = list_path.open()
+        except FileNotFoundError as e:
+            raise ManifestListNotFound(e)
+        except RuntimeError as e:
+            raise ManifestListNotFound(e)
+        return json.loads(f.read().decode('utf-8'))
+
 class QuayRepo:
 
     QUAY_BASE_URL = 'https://quay.io/api/v1/repository'
@@ -139,7 +174,7 @@ class QuayRepo:
                         'tag',
                         '?onlyActiveTags=true&specificTag='
                 ])
-        
+
         resp = requests.get(url + self.image.get_tag())
 
         if resp.status_code == 403:
@@ -164,7 +199,7 @@ class QuayRepo:
                     raise ManifestListNotFound('Tag {} is not manifest list'.format(self.image.get_tag()))
                 else:
                     raise ManifestNotFound('Tag {} is a manifest list'.format(self.image.get_tag()))
-                    
+
 
 
     def _get_quay_repo(self):
