@@ -1,3 +1,4 @@
+![Python application](https://github.com/multicloud-ops/operator-csv-libs/workflows/Python%20application/badge.svg) 
 # Operator CSV libs
 
 ## Usage
