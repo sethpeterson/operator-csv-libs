@@ -1,4 +1,4 @@
-![Python application](https://github.com/multicloud-ops/operator-csv-libs/workflows/Python%20application/badge.svg) 
+![Python application](https://github.com/multicloud-ops/operator-csv-libs/workflows/Python%20application/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=multicloud-ops_operator-csv-libs&metric=alert_status)](https://sonarcloud.io/dashboard?id=multicloud-ops_operator-csv-libs)
 # Operator CSV libs
 
 ## Usage
