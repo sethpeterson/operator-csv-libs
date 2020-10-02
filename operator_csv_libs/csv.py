@@ -45,6 +45,18 @@ class ClusterServiceVersion:
         self._get_operator_images()
         self._get_related_images()
 
+    def set_deployments_annotations(self, key=None, value=None):
+        """Set key with value passed in for each deployment in the CSV
+
+        Arguments:
+            key {string} -- key being search for in deployment annotations
+            value {string} -- value that will be assigned to the key passed in
+        """
+        for d in self.csv['spec']['install']['spec']['deployments']:
+            if not 'annotations' in d['spec']['template']['metadata']:
+                continue
+            d['spec']['template']['metadata']['annotations'][key] = value
+                    
     def set_version(self, version):
         """Set the target version for the CSV
 

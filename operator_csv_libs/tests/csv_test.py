@@ -4,17 +4,18 @@ from ..csv import ClusterServiceVersion
 from ..images import Image
 
 dummyOwnedCustomResourceDefinitions = [{
-    "description": "customresourcedefinitionsDummyDescription", 
-    "displayName": "customresourcedefinitionsDummyDisplayName", 
-    "kind": "customresourcedefinitionsDummyKind", 
-    "name": "customresourcedefinitionsDummyName", 
+    "description": "customresourcedefinitionsDummyDescription",
+    "displayName": "customresourcedefinitionsDummyDisplayName",
+    "kind": "customresourcedefinitionsDummyKind",
+    "name": "customresourcedefinitionsDummyName",
     "version": "customresourcedefinitionsDummyVersion"
 }]
 
 dummyAnnotations = {
+    "productVersion": "dummyProductVersion",
     "olm.relatedImage.dummyRelatedImages1": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1",
     "olm.relatedImage.dummyRelatedImages2": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2",
-    "olm.relatedImage.dummyRelatedImages3": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3"                     
+    "olm.relatedImage.dummyRelatedImages3": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3"
 }
 
 dummyRelatedImages = [
@@ -31,29 +32,29 @@ dummyImagePullSecrets = [
 ]
 
 DUMMY_CSV = {
-    "apiVersion": "apiVersionDummy", 
-    "kind": "ClusterServiceVersion", 
+    "apiVersion": "apiVersionDummy",
+    "kind": "ClusterServiceVersion",
     "metadata": {
         "annotations": {
             "olm.skipRange": "metadataDummySkipRange"
-        }, 
+        },
         "name": "metadataDummyName"
-    }, 
+    },
     "spec": {
         "customresourcedefinitions": {
             "owned": dummyOwnedCustomResourceDefinitions
-        }, 
+        },
         "install": {
             "spec": {
                 "deployments": [{
-                    "name": "deploymentsDummyName", 
+                    "name": "deploymentsDummyName",
                     "spec": {
                         "template": {
                             "metadata": {
                                 "annotations": dummyAnnotations
-                            }, 
+                            },
                             "spec": {
-                                "containers": dummyContainers, 
+                                "containers": dummyContainers,
                                 "imagePullSecrets": dummyImagePullSecrets
                             }
                         }
@@ -61,7 +62,7 @@ DUMMY_CSV = {
                 }]
             }
         },
-        "relatedImages": dummyRelatedImages, 
+        "relatedImages": dummyRelatedImages,
         "replaces": "dummyReplaces",
         "version": "dummyVersion"
     }
@@ -73,13 +74,37 @@ class TestCSV(unittest.TestCase):
         self.csvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
         self.csvWithParams = ClusterServiceVersion(DUMMY_CSV, 'newName', 'newTargetVersion', 'newReplaces', 'newSkipRange', 'newLogger')
 
-        self.operatorImage1 = Image(deployment='deploymentsDummyName', container='containerImageDummyName1', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:container_image_dummy_sha1')
-        self.newOperatorImage1 = Image(deployment='deploymentsDummyName', container='containerImageDummyName1', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:new_container_image_dummy_sha1')
+        self.operatorImage1 = Image(
+            deployment='deploymentsDummyName',
+            container='containerImageDummyName1',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:container_image_dummy_sha1'
+        )
+        self.newOperatorImage1 = Image(
+            deployment='deploymentsDummyName',
+            container='containerImageDummyName1',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:new_container_image_dummy_sha1'
+        )
 
-        self.Image1 = Image(deployment='deploymentsDummyName', name='dummyRelatedImages1', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1')
-        self.Image2 = Image(deployment='deploymentsDummyName', name='dummyRelatedImages2', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2')
-        self.Image3 = Image(deployment='deploymentsDummyName', name='dummyRelatedImages3', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3')
-        self.Image4 = Image(deployment='deploymentsDummyName', name='dummyRelatedImages4', image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4')
+        self.Image1 = Image(
+            deployment='deploymentsDummyName',
+            name='dummyRelatedImages1',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1'
+        )
+        self.Image2 = Image(
+            deployment='deploymentsDummyName',
+            name='dummyRelatedImages2',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2'
+            )
+        self.Image3 = Image(
+            deployment='deploymentsDummyName',
+            name='dummyRelatedImages3',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3'
+        )
+        self.Image4 = Image(
+            deployment='deploymentsDummyName',
+            name='dummyRelatedImages4',
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
+        )
 
     def test_init(self):
         testAnnotationRelatedImages = [self.Image1, self.Image2, self.Image3]
@@ -144,8 +169,40 @@ class TestCSV(unittest.TestCase):
         self.assertEqual(self.csvWithParams.replaces, 'newReplaces')
         self.assertEqual(self.csvWithParams.skiprange, 'newSkipRange')
 
+    def test_set_deployments_annotations(self, key=None, value=None):
+        testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
+        TEST_DUMMY_CSV = copy.deepcopy(DUMMY_CSV)
+        testDummyAnnotations = copy.deepcopy(dummyAnnotations)
+
+        # check to see that function returns correct csv
+        newCloudpakVersion = 'newDummyCloudpakVersion'
+        newProductVersion = 'newDummyProductVersion'
+        testDummyAnnotations['cloudpakVersion'] = newCloudpakVersion
+        testcsvWithoutParams.set_deployments_annotations(key='cloudpakVersion', value=newCloudpakVersion)
+        testDummyAnnotations['productVersion'] = newProductVersion
+        testcsvWithoutParams.set_deployments_annotations('productVersion', newProductVersion)
+        TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
+        self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
+        # check to see if function works without specifiying parameter
+        newCloudpakVersion = 'newDummyCloudpakVersion2'
+        newProductVersion = 'newDummyProductVersion2'
+        testDummyAnnotations['cloudpakVersion'] = newCloudpakVersion
+        testcsvWithoutParams.set_deployments_annotations(key='cloudpakVersion', value=newCloudpakVersion)
+        testDummyAnnotations['productVersion'] = newProductVersion
+        testcsvWithoutParams.set_deployments_annotations('productVersion', newProductVersion)
+        TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
+        self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
+        # check to see that it will not add anything if annotations doesn't exiist
+        TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata'].pop('annotations')
+        testcsvWithoutParams.csv['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata'].pop('annotations')
+        testcsvWithoutParams.set_deployments_annotations('productVersion', newProductVersion)
+        self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
     def test_set_version(self):
         testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
+
         # set new version
         testcsvWithoutParams.set_version('newVersion')
 
@@ -218,7 +275,7 @@ class TestCSV(unittest.TestCase):
 
         # check to see if csv was changed with new related images based on annotated related images
         testDummyRelatedImages.append({
-            'image': 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3', 
+            'image': 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3',
             'name': 'dummyRelatedImages3'
         })
         TEST_DUMMY_CSV['spec']['relatedImages'] = testDummyRelatedImages
@@ -239,7 +296,7 @@ class TestCSV(unittest.TestCase):
         self.assertEqual(testcsvWithoutParams.get_updated_csv(), TEST_DUMMY_CSV)
 
         # make changes to csv and see if changes are reflected
-        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'  
+        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
         testDummyContainers.append({'image': self.newOperatorImage1.image, 'name':  self.newOperatorImage1.container})
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['spec']['containers'] = testDummyContainers
@@ -302,7 +359,7 @@ class TestCSV(unittest.TestCase):
         # function is already called when csv is created with version, check to see if values are updated correctly
         self.assertEqual(testcsvWithParams.csv['spec']['version'], testcsvWithParams.version)
         self.assertEqual(testcsvWithParams.csv['spec']['version'], 'newTargetVersion')
-        self.assertEqual(testcsvWithParams.csv['metadata']['name'], testcsvWithParams.versioned_name) 
+        self.assertEqual(testcsvWithParams.csv['metadata']['name'], testcsvWithParams.versioned_name)
         self.assertEqual(testcsvWithParams.csv['metadata']['name'], 'newName.vnewTargetVersion')
         self.assertEqual(testcsvWithParams.csv['metadata']['annotations']['olm.skipRange'], testcsvWithParams.skiprange)
         self.assertEqual(testcsvWithParams.csv['metadata']['annotations']['olm.skipRange'], 'newSkipRange')
@@ -369,7 +426,7 @@ class TestCSV(unittest.TestCase):
         TEST_DUMMY_CSV = copy.deepcopy(DUMMY_CSV)
 
         # make changes to csv and see if changes are reflected
-        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'  
+        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
         # add more annotation realted images
         testcsvWithoutParams.annotation_related_images = [self.Image1, self.Image2, self.Image3, self.Image4]
