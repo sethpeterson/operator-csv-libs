@@ -3,6 +3,14 @@ import copy
 from ..csv import ClusterServiceVersion
 from ..images import Image
 
+relatedImageSHA1 = "b955bc2952a78bd884896ea88b3325920891cfbb6a36ec5014d1a621eb68c51a"
+relatedImageSHA2 = "fe8c229a9c23fc204a93a638e8fd1fe440023d41c7e53fa0b2e50eee34c95836"
+relatedImageSHA3 = "eed601bbe53f9f772b408a5c7c05fc2a3fde93e1da32144ffd2b0bd0cf2577aa"
+relatedImageSHA4 = "cd76c3abc060b3708b8c2835dc66477932dc5869f2dca8060faf4b01ce9533af"
+
+containerImageSHA1 = "e2356fc61b08c77c1117a2c9c0d21660ade76abd285f9d9fd9ef3e3930d16f98"
+newContainerImageSHA1 =  "b8094a55d0684d3a3d8fd1b0486282e5684c5fa576633878b38d764ce823525b"
+
 dummyOwnedCustomResourceDefinitions = [{
     "description": "customresourcedefinitionsDummyDescription",
     "displayName": "customresourcedefinitionsDummyDisplayName",
@@ -13,18 +21,18 @@ dummyOwnedCustomResourceDefinitions = [{
 
 dummyAnnotations = {
     "productVersion": "dummyProductVersion",
-    "olm.relatedImage.dummyRelatedImages1": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1",
-    "olm.relatedImage.dummyRelatedImages2": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2",
-    "olm.relatedImage.dummyRelatedImages3": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3"
+    "olm.relatedImage.dummyRelatedImages1": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(relatedImageSHA1),
+    "olm.relatedImage.dummyRelatedImages2": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(relatedImageSHA2),
+    "olm.relatedImage.dummyRelatedImages3": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(relatedImageSHA3)
 }
 
 dummyRelatedImages = [
-    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1", "name": "dummyRelatedImages1"},
-    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2", "name": "dummyRelatedImages2"}
+    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(relatedImageSHA1), "name": "dummyRelatedImages1"},
+    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(relatedImageSHA2), "name": "dummyRelatedImages2"}
 ]
 
 dummyContainers = [
-    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:container_image_dummy_sha1", "name": "containerImageDummyName1"}
+    {"image": "hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}".format(containerImageSHA1), "name": "containerImageDummyName1"}
 ]
 
 dummyImagePullSecrets = [
@@ -77,33 +85,33 @@ class TestCSV(unittest.TestCase):
         self.operatorImage1 = Image(
             deployment='deploymentsDummyName',
             container='containerImageDummyName1',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:container_image_dummy_sha1'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(containerImageSHA1)
         )
         self.newOperatorImage1 = Image(
             deployment='deploymentsDummyName',
             container='containerImageDummyName1',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:new_container_image_dummy_sha1'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(newContainerImageSHA1)
         )
 
         self.Image1 = Image(
             deployment='deploymentsDummyName',
             name='dummyRelatedImages1',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha1'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA1)
         )
         self.Image2 = Image(
             deployment='deploymentsDummyName',
             name='dummyRelatedImages2',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha2'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA2)
             )
         self.Image3 = Image(
             deployment='deploymentsDummyName',
             name='dummyRelatedImages3',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA3)
         )
         self.Image4 = Image(
             deployment='deploymentsDummyName',
             name='dummyRelatedImages4',
-            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
+            image='hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA4)
         )
 
     def test_init(self):
@@ -275,7 +283,7 @@ class TestCSV(unittest.TestCase):
 
         # check to see if csv was changed with new related images based on annotated related images
         testDummyRelatedImages.append({
-            'image': 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha3',
+            'image': 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA3),
             'name': 'dummyRelatedImages3'
         })
         TEST_DUMMY_CSV['spec']['relatedImages'] = testDummyRelatedImages
@@ -296,7 +304,7 @@ class TestCSV(unittest.TestCase):
         self.assertEqual(testcsvWithoutParams.get_updated_csv(), TEST_DUMMY_CSV)
 
         # make changes to csv and see if changes are reflected
-        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
+        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA4)
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
         testDummyContainers.append({'image': self.newOperatorImage1.image, 'name':  self.newOperatorImage1.container})
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['spec']['containers'] = testDummyContainers
@@ -420,13 +428,13 @@ class TestCSV(unittest.TestCase):
         testcsvWithoutParams._update_operator_container_images()
         self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
 
-    # def test___update_operand_images(self):
+    def test___update_operand_images(self):
         testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
         testDummyAnnotations = copy.deepcopy(dummyAnnotations)
         TEST_DUMMY_CSV = copy.deepcopy(DUMMY_CSV)
 
         # make changes to csv and see if changes are reflected
-        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:related_images_dummy_sha4'
+        testDummyAnnotations['olm.relatedImage.dummyRelatedImages4'] = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:{}'.format(relatedImageSHA4)
         TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata']['annotations'] = testDummyAnnotations
         # add more annotation realted images
         testcsvWithoutParams.annotation_related_images = [self.Image1, self.Image2, self.Image3, self.Image4]
