@@ -42,7 +42,7 @@ class TestImageRepo(unittest.TestCase):
         self.artifactoryImgWithDigest.set_tag('latest')
         
         # create artifactory repo object
-        self.artifactoryImgRepoWithOsAuthentication= ImageRepo(self.artifactoryImgWithDigest)
+        self.artifactoryImgRepoWithOsAuthentication = ImageRepo(self.artifactoryImgWithDigest)
 
     def test_init(self):
         # check to see that image with digest is initialized correctly
