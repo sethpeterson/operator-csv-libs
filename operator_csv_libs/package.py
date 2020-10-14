@@ -30,14 +30,10 @@ class Package:
             for c in package['channels']:
                 ch = Channel(c['name'], c['currentCSV'])
                 self.channels.append(ch)
-        elif operator is not None and default_channel is not None:
-            self.operator = operator
-            self.default_channel = default_channel
-            self.channels = []
         else:
             self.channels = []
-            self.operator = ''
-            self.default_channel = ''
+            self.operator = operator if operator is not None else ''
+            self.default_channel = default_channel if default_channel is not None else ''
 
     def __str__(self):
         return 'Package class for {} operator'.format(self.operator)

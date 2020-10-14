@@ -18,7 +18,9 @@ class TestPackage(unittest.TestCase):
         for channel in package_file['channels']:
             channels.append(Channel(channel['name'], channel['currentCSV']))
         self.mock_package_with_object = Package(package=package_file)
-        self.mock_package_with_operator = Package(operator=package_operator, default_channel=package_default_channel)
+        self.mock_package_with_operator = Package(operator=package_operator)
+        self.mock_package_with_default_channel = Package(default_channel=package_default_channel)
+        self.mock_package_with_operator_and_default_channel = Package(operator=package_operator, default_channel=package_default_channel)
         self.mock_package_empty = Package()
 
     def test_init(self):
@@ -28,11 +30,20 @@ class TestPackage(unittest.TestCase):
         self.assertIsInstance(self.mock_package_with_object.channels[0], Channel)
         self.assertIsInstance(self.mock_package_with_object.channels[1], Channel)
         
-        # If package_json is not passed
-        
+        # If operator and default channel are passed
+        self.assertEqual(self.mock_package_with_operator_and_default_channel.operator, package_operator)
+        self.assertEqual(self.mock_package_with_operator_and_default_channel.default_channel, package_default_channel)
+        self.assertEqual(self.mock_package_with_operator_and_default_channel.channels, [])
+
+        # If only operator is passed
         self.assertEqual(self.mock_package_with_operator.operator, package_operator)
-        self.assertEqual(self.mock_package_with_operator.default_channel, package_default_channel)
+        self.assertEqual(self.mock_package_with_operator.default_channel, '')
         self.assertEqual(self.mock_package_with_operator.channels, [])
+
+        # If only default channel is passed
+        self.assertEqual(self.mock_package_with_default_channel.operator, '')
+        self.assertEqual(self.mock_package_with_default_channel.default_channel, package_default_channel)
+        self.assertEqual(self.mock_package_with_default_channel.channels, [])
         
         # If no arguments passed
         self.assertEqual(self.mock_package_empty.operator, '')
