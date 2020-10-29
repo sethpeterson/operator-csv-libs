@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibm-management-orchestrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ibm-management-orchestrator
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        cloudpakId: 7f6eda41081c4e08a255be1f0b4aef2d
+        cloudpakName: IBM Cloud Pak for Multicloud Management
+        cloudpakVersion: '2.1'
+        olm.relatedImage.cp4mcm-catalog: cp.icr.io/cp/cp4mcm/cp4mcm-operator-catalog@sha256:b2aeba0e620b4325bda303af3024e7dafc809dd637ca99c50788a3d6a0e6234f
+        productChargedContainers: All
+        productCloudpakRatio: '1:1'
+        productID: 74394a3a4a81449f9c7c81403d09dca3
+        productMetric: MANAGED_VIRTUAL_SERVER
+        productName: IBM Cloud Pak for Multicloud Management Orchestrator
+        productVersion: '2.1'
+      labels:
+        name: ibm-management-orchestrator
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - ppc64le
+      containers:
+      - command:
+        - ibm-management-orchestrator
+        env:
+        - name: WATCH_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['olm.targetNamespaces']
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: OPERATOR_NAME
+          value: ibm-management-orchestrator
+        - name: INITIAL_CATALOG
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['olm.relatedImage.cp4mcm-catalog']
+        image: quay.io/cp4mcm/ibm-management-orchestrator@sha256:9c1840496d49b95a1d02a44cc0269f6a4a0bcec2711eda9812da9dd8b0fa6990
+        imagePullPolicy: IfNotPresent
+        name: ibm-management-orchestrator
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+      imagePullSecrets:
+      - name: ibm-management-pull-secret
+      serviceAccountName: ibm-management-orchestrator

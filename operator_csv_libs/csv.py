@@ -174,6 +174,28 @@ class ClusterServiceVersion:
             [List of Images] -- Returns a List of Images as defined in Images class
         """
         return self.annotation_related_images
+
+    def get_operator_deployments(self, api_version='apps/v1', kind='Deployment'):
+        """ Return a list of kubernetes deployment objects constructed from the CSV deployments section
+
+        Returns:
+            [List fo Dict] -- List of kubernetes deployment objects
+        """
+        # Extract the deployment(s)
+        deployments = []
+        for d in self.csv['spec']['install']['spec']['deployments']:
+            deployments.append(copy.deepcopy(d))
+
+        # Adjust the dict to make it valid deployment object
+        for d in deployments:
+            d.update({"apiVersion": api_version, "kind": kind})
+            d['metadata'] = {
+                'name': d['name']
+                }
+            del(d['name'])
+            
+        return deployments
+
       
     def _update_version_references(self):
         """ Update the version specifc fields based on self.version

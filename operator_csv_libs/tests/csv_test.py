@@ -1,7 +1,12 @@
 import unittest
+import pytest
 import copy
+import os, yaml
 from ..csv import ClusterServiceVersion
 from ..images import Image
+
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 relatedImageSHA1 = "b955bc2952a78bd884896ea88b3325920891cfbb6a36ec5014d1a621eb68c51a"
 relatedImageSHA2 = "fe8c229a9c23fc204a93a638e8fd1fe440023d41c7e53fa0b2e50eee34c95836"
@@ -441,6 +446,41 @@ class TestCSV(unittest.TestCase):
         # update csv and check to see if those changes are correct
         testcsvWithoutParams._update_operand_images()
         self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
+    def test__get_deployments(self):
+        # Read in sample files
+        with open(THIS_DIR + '/test_files/valid_operator_deployment.yaml', 'r') as stream:
+            deployment_sample = yaml.safe_load(stream)
+        with open(THIS_DIR + '/test_files/valid_csv.yaml', 'r') as stream:
+            csv_sample = yaml.safe_load(stream)
+
+        c = ClusterServiceVersion(csv_sample)
+
+        # Increasing the maxdiff lets us see all the context on how the yaml failed
+        self.maxDiff = None
+
+         ## Assert that dpeloyment is as expected
+        operator_deployment_variations = [
+            {}, # default values
+            {'api_version': 'apps/v1', 'kind': 'Deployment'},
+        ]
+
+        for variation in operator_deployment_variations:
+            with self.subTest(variation=variation):
+                deployments = c.get_operator_deployments(**variation)
+
+                # We expect a dict back
+                self.assertIsInstance(deployments, list)
+
+                # Ensure we only got a single deployment
+                self.assertEqual(len(deployments), 1)
+                
+                # Ensure deployment is valid
+                self.assertDictEqual(deployments[0], deployment_sample)
+
+        ## Assert that original CSV did not get changed at all
+        self.assertEqual(c.csv, c.original_csv)
+
 
     def test__setup_basic_logger(self):
         # should not be tested because it only sets up logger
