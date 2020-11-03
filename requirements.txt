@@ -1,6 +1,6 @@
 pyyaml==5.3.1
 pygithub==1.53
-dohq-artifactory==0.7.382
+dohq-artifactory==0.7.468
 slack_log_handler==0.3.0
 requests==2.24.0
 pytest==6.1.2
