@@ -481,6 +481,21 @@ class TestCSV(unittest.TestCase):
         ## Assert that original CSV did not get changed at all
         self.assertEqual(c.csv, c.original_csv)
 
+    def test__get_formatted_csv(self):
+        # Read in sample files
+        with open(THIS_DIR + '/test_files/valid_csv_formatted.yaml', 'r') as stream:
+            csv_sample = yaml.safe_load(stream)
+
+        c = ClusterServiceVersion(csv_sample)
+
+        # Increasing the maxdiff lets us see all the context on how the yaml failed
+        self.maxDiff = None
+
+        # Ensure that data has not been changed
+        self.assertDictEqual(yaml.safe_load(c.get_formatted_csv()), csv_sample)
+
+        # Ensure that format has been maintained
+        self.assertEqual(c.get_formatted_csv(), yaml.dump(csv_sample, default_flow_style=False))
 
     def test__setup_basic_logger(self):
         # should not be tested because it only sets up logger

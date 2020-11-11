@@ -1,5 +1,13 @@
-import logging, sys, copy
+import logging, sys, copy, yaml
 from .images import Image
+
+class _literal(str):
+    pass
+
+
+def _literal_presenter(dumper, data):
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+
 
 class ClusterServiceVersion:
 
@@ -150,6 +158,13 @@ class ClusterServiceVersion:
         self._update_operand_images()
 
         return self.csv
+
+    def get_formatted_csv(self):
+        """ Returns a stringified save ready formatted ClusterServiceVersion
+            This allows maintaining the format of the 'alm-examples: |-' block
+        """
+        yaml.add_representer(_literal, _literal_presenter)
+        return yaml.dump(self.get_updated_csv(), default_flow_style=False)
 
     def get_replaces(self):
         """ Return String
