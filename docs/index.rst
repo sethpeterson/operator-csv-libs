@@ -71,7 +71,7 @@ The ``Channel`` class
    :inherited-members:
    
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
 
 Index

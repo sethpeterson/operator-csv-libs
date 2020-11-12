@@ -4,14 +4,10 @@ from .images import Image
 class _literal(str):
     pass
 
-
 def _literal_presenter(dumper, data):
     return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
 
-
 class ClusterServiceVersion:
-
-
     LATEST_IMAGE_INDICATOR   = '-latest'
     RELATED_IMAGE_IDENTIFIER = 'olm.relatedImage.'
 
@@ -66,7 +62,7 @@ class ClusterServiceVersion:
             if not 'annotations' in d['spec']['template']['metadata']:
                 continue
             d['spec']['template']['metadata']['annotations'][key] = value
-                    
+
     def set_version(self, version):
         """Set the target version for the CSV
 
@@ -140,7 +136,7 @@ class ClusterServiceVersion:
                 'name':     r.name,
                 'image':    r.image
             })
-    
+
     def get_owned_crds(self):
         """ Returns a list of owned CustomResourceDefinitions
 
@@ -212,7 +208,7 @@ class ClusterServiceVersion:
             del(d['name'])
             
         return deployments
-      
+
     def _update_version_references(self):
         """ Update the version specifc fields based on self.version
         """
@@ -243,7 +239,7 @@ class ClusterServiceVersion:
                 )
                 self.original_operator_images.append(o)
                 self.operator_images.append(o)
-                
+       
     def _get_related_images(self):
         # Capture related images from annotations
         for d in self.csv['spec']['install']['spec']['deployments']:

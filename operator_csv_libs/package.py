@@ -15,7 +15,6 @@ PACKAGE_FILE_FORMAT = {
 }
 
 class Package:
-
     PACKAGE_FILE_FORMAT = {
         'channels': [],
         'defaultChannel': '{}-{}',
@@ -37,18 +36,18 @@ class Package:
 
     def __str__(self):
         return 'Package class for {} operator'.format(self.operator)
-    
+
     def get_channel(self, name):
         for c in self.channels:
             if c.get_name() == name:
                 return c
-    
+
     def get_channels(self):
         channels = []
         for c in self.channels:
             channels.append(c)
         return channels
-        
+
     def create_channel(self, name, current_csv, default=False):
         ch = Channel(name, current_csv)
         self.channels.append(ch)
@@ -82,12 +81,15 @@ class Channel:
     def __init__(self, name, currentCSV):
         self.name = name
         self.currentCSV = currentCSV
-    
+
     def get_current_csv(self):
         return self.currentCSV
+
     def set_current_csv(self, new_csv):
         self.currentCSV = new_csv
+
     def get_name(self):
         return self.name
+
     def set_name(self, name):
         self.name = name

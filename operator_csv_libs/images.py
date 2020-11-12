@@ -60,12 +60,11 @@ class Image:
         if not self.digest:
             # We won't overwrite image info if we have digest
             self.image = '{}:{}'.format(self.image.split(':')[0], tag)
-    
+
     def set_image_repo(self, repo):
         self.image      = self.image.replace(self.image_repo, repo)
         self.image_repo = repo
         return True
-        
     
     def get_image_repo(self):
         """Returns the image_repo section of the overall image
@@ -93,7 +92,7 @@ class Image:
         :rtype: string
         """
         return self.name
-    
+
     def get_image_name(self):
         """Returns the image name, stripped of repo and tag/digest
 
@@ -101,7 +100,7 @@ class Image:
         :rtype: string
         """
         return self.image_name
-    
+
     def get_tag(self):
         """Get the tag associated with an image if known
 
@@ -112,6 +111,7 @@ class Image:
             return self.tag
         else:
             return None
+
     def get_image(self):
         """Return the full image 
 
