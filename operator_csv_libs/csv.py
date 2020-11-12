@@ -56,9 +56,11 @@ class ClusterServiceVersion:
     def set_deployments_annotations(self, key=None, value=None):
         """Set key with value passed in for each deployment in the CSV
 
-        Arguments:
-            key {string} -- key being search for in deployment annotations
-            value {string} -- value that will be assigned to the key passed in
+        :param key: Key being search for in deployment annotations
+        :type key: string
+
+        :param value: Value that will be assigned to the key passed in
+        :type value: string
         """
         for d in self.csv['spec']['install']['spec']['deployments']:
             if not 'annotations' in d['spec']['template']['metadata']:
@@ -78,8 +80,8 @@ class ClusterServiceVersion:
     def set_replaces(self, replaces):
         """ Set the release that this replaces
 
-        Arguments:
-            replaces {string} -- The versioned name of the csv that this csv replaces
+        :param replaces: The versioned name of the csv that this csv replaces
+        :type replaces: string
         """
         self.replaces = replaces
         self.csv['spec']['replaces'] = self.replaces
@@ -87,8 +89,8 @@ class ClusterServiceVersion:
     def set_image_pullsecret(self, name):
         """ Set the image pull secret for all operator deployment deployments. Overwrites any existing pull secret
 
-        Arguments:
-            name {string|list} -- String or list of strings containing name of the pull secret to add
+        :param name: String or list of strings containing name of the pull secret to add
+        :type name: string, list 
         """
         if isinstance(name, str):
             p = [{'name': name}]
@@ -101,8 +103,8 @@ class ClusterServiceVersion:
     def add_image_pullsecret(self, name):
         """ Add image pull secret for all operator deployment deployments. Existing pull secrets will be kept
 
-        Arguments:
-            name {string|list} -- String or list of strings containing name of the pull secret to add
+        :param name: String or list of strings containing name of the pull secret to add
+        :type name: string, list 
         """
         if isinstance(name, str):
             p = [{'name': name}]
@@ -142,16 +144,16 @@ class ClusterServiceVersion:
     def get_owned_crds(self):
         """ Returns a list of owned CustomResourceDefinitions
 
-        Returns:
-            [list [dict]]: List of owned custom resource definitions as dict object
+        :return: List of owned custom resource definitions as dict object
+        :rtype: list
         """
         return self.csv['spec']['customresourcedefinitions']['owned']
 
     def get_updated_csv(self):
         """ Returns the updated CSV object
 
-        Returns:
-            [dict] -- CSV with updated version and image information
+        :return: CSV with updated version and image information
+        :rtype: dict
         """
         # Merge in the updates that are done to Operatorimages and Operandimages
         self._update_operator_container_images()
@@ -161,7 +163,7 @@ class ClusterServiceVersion:
 
     def get_formatted_csv(self):
         """ Returns a stringified save ready formatted ClusterServiceVersion
-            This allows maintaining the format of the 'alm-examples: |-' block
+            This allows maintaining the format of the `alm-examples: |-` block
         """
         yaml.add_representer(_literal, _literal_presenter)
         return yaml.dump(self.get_updated_csv(), default_flow_style=False)
@@ -169,32 +171,32 @@ class ClusterServiceVersion:
     def get_replaces(self):
         """ Return String
 
-        Returns:
-            String -- Returns the csv file name with previous version
+        :return: Returns the csv file name with previous version
+        :rtype: string
         """
         return self.csv['spec']['replaces']
 
     def get_operator_images(self):
         """ Return a list of images used for operator deployment
 
-        Returns:
-            [List of Images] -- Returns a List of Images as defined in Images class
+        :return: Returns a List of Images as defined in Images class
+        :rtype: list
         """
         return self.operator_images
 
     def get_annotation_related_images(self):
         """ Return a list of images found in 'olm.relatedImages.*' deployment annotations
 
-        Returns:
-            [List of Images] -- Returns a List of Images as defined in Images class
+        :return: Returns a List of Images as defined in Images class
+        :rtype: list
         """
         return self.annotation_related_images
 
     def get_operator_deployments(self, api_version='apps/v1', kind='Deployment'):
         """ Return a list of kubernetes deployment objects constructed from the CSV deployments section
 
-        Returns:
-            [List fo Dict] -- List of kubernetes deployment objects
+        :return: List of kubernetes deployment objects
+        :rtype: list
         """
         # Extract the deployment(s)
         deployments = []
@@ -210,7 +212,6 @@ class ClusterServiceVersion:
             del(d['name'])
             
         return deployments
-
       
     def _update_version_references(self):
         """ Update the version specifc fields based on self.version

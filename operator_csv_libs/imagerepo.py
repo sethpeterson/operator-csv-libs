@@ -28,10 +28,13 @@ class ImageRepo:
 
     def get_raw_manifest_list(self):
         """Return the docker manifest list in json format
+
         Raises:
             ManifestListNotFound: [description]
+
         Returns:
             DICT: manifest.list.json content
+
         """
         return self.image_repo.get_raw_manifest_list()
 
@@ -130,10 +133,13 @@ class ArtifactoryRepo:
 
     def get_raw_manifest_list(self):
         """Return the docker manifest list in json format
+
         Raises:
             ManifestListNotFound: [description]
+
         Returns:
             DICT: manifest.list.json content
+
         """
 
         listpath = '/'.join([
