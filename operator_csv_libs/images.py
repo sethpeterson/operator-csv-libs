@@ -2,14 +2,17 @@ class Image:
     def __init__(self, name=None, image=None, deployment=None, container=None):
         """Object to hold information about a container or related image
 
-        Keyword Arguments:
-            image {string}      -- Image 
-            name {string}       -- Name as identified in spec.relatedImages or olm.relatedImage annotation
-            deployment {string} -- Name of deployment(default: {None})
-            container {string}  -- Name of container (default: {None})
-                
-            
+        :param image: Image
+        :type image: string
 
+        :param name: Name as identified in spec.relatedImages or olm.relatedImage annotation
+        :type name: string
+
+        :param deployment: Name of deployment(default: {None})
+        :type deployment: string
+
+        :param container: Name of container (default: {None})
+        :type container: string
         """
         self.name       = name
         self.image      = image
@@ -34,8 +37,8 @@ class Image:
     def set_digest(self, digest):
         """Set image digest
 
-        Arguments:
-            digest {string} -- Digest in format <type>:<hash>
+        :param digest: Digest in format <type>:<hash>
+        :type digest: string
         """
         if self.digest:
             # If already have a digest set we need to carefully replace
@@ -50,8 +53,8 @@ class Image:
     def set_tag(self, tag):
         """Set new tag for image. Will update self.image only if image is identified by tag, but not overwrite digest
 
-        Arguments:
-            tag {String} -- New tag to set
+        :param tag: New tag to set
+        :type tag: string
         """
         self.tag = tag
         if not self.digest:
@@ -67,16 +70,16 @@ class Image:
     def get_image_repo(self):
         """Returns the image_repo section of the overall image
 
-        Returns:
-            [string] -- [image repo i.e. quay.io/myrepo]
+        :return: Image repo i.e. quay.io/myrepo]
+        :rtype: string
         """
         return self.image_repo
 
     def get_digest(self):
         """Returns image digest 
 
-        Returns:
-            [string] -- [digest in format <type>:<hash> ]
+        :return: Digest in format <type>:<hash> 
+        :rtype: string
         """
         if hasattr(self, 'digest'):
             return self.digest
@@ -86,24 +89,24 @@ class Image:
     def get_olm_name(self):
         """Return the name of the image. Typically associated with olm.relatedImage and spec.relatedImages
 
-        Returns:
-            [string] -- [Name]
+        :return: Name
+        :rtype: string
         """
         return self.name
     
     def get_image_name(self):
         """Returns the image name, stripped of repo and tag/digest
 
-        Returns:
-            [string] -- [Name]
+        :return: Name
+        :rtype: string
         """
         return self.image_name
     
     def get_tag(self):
         """Get the tag associated with an image if known
 
-        Returns:
-            [string] -- [tag]
+        :return: Tag
+        :rtype: string
         """
         if hasattr(self, 'tag'):
             return self.tag
@@ -112,7 +115,7 @@ class Image:
     def get_image(self):
         """Return the full image 
 
-        Returns:
-            [string] -- [Full image in format <repo>/<name>[@digest][:tag]]
+        :return: Full image in format <repo>/<name>[@digest][:tag]
+        :rtype: string
         """
         return self.image
