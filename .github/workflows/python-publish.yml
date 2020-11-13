@@ -43,14 +43,8 @@ jobs:
     -
       name: Update Documentation
       run: |
-        cd docs
-        make html
-        pwd
-        cd ..
-        pwd
-        echo "in here before commit"
+        make docs/html
         git add .
-        echo "in here before commit"
         git config user.email "evelio.sosau@ibm.com"
         git config user.name "Evelio Sosa"
         git commit -m "update operator csv libs documentation"
