@@ -44,7 +44,7 @@ jobs:
       name: Update Documentation
       run: |
         git checkout .
-        make docs/html
+        make -C docs/html
         git add .
         git config user.email "evelio.sosau@ibm.com"
         git config user.name "Evelio Sosa"
