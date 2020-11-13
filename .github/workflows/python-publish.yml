@@ -39,6 +39,11 @@ jobs:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        ls
+    -
+      name: Install sphinx
+      run: |
+        apt-get install python3-sphinx
     -
       name: Update Documentation
       run: |
