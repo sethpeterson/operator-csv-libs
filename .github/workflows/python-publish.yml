@@ -4,7 +4,8 @@
 name: Upload Python Package
 
 on:
-  push
+  release:
+    types: [created]
 
 jobs:
   deploy:
@@ -20,7 +21,7 @@ jobs:
     - name: Prepare version
       run: |
         # get release version
-        VERSION="v.1.6.7"
+        VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')
 
         # file and content that will be replaced
         PLACEHOLDER="version='default'"
