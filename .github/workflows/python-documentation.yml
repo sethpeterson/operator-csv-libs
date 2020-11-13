@@ -1,0 +1,30 @@
+name: Upload Python Package
+
+on:
+  push
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip sphinx sphinx_rtd_theme
+        pip install -r requirements.txt
+    -
+      name: Update Documentation
+      run: |
+        make --directory docs/ html
+        git add .
+        git config user.email "evelio.sosau@ibm.com"
+        git config user.name "Evelio Sosa"
+        git commit -m "update operator csv libs documentation"
+        git push origin master
