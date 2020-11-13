@@ -44,7 +44,7 @@ jobs:
     -
       name: Update Documentation
       run: |
-        git checkout .
+        git reset --hard
         make --directory docs/ html
         git add .
         git config user.email "evelio.sosau@ibm.com"
