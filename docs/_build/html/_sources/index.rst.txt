@@ -11,7 +11,6 @@ The ``ClusterServiceVersion`` class
 .. autoclass:: operator_csv_libs.csv.ClusterServiceVersion
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``ImageRepo`` class
@@ -19,7 +18,6 @@ The ``ImageRepo`` class
 .. autoclass:: operator_csv_libs.imagerepo.ImageRepo
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``ArtifactoryRepo`` class
@@ -27,7 +25,6 @@ The ``ArtifactoryRepo`` class
 .. autoclass:: operator_csv_libs.imagerepo.ArtifactoryRepo
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``QuayRepo`` class
@@ -35,7 +32,6 @@ The ``QuayRepo`` class
 .. autoclass:: operator_csv_libs.imagerepo.QuayRepo
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``Image`` class
@@ -43,7 +39,6 @@ The ``Image`` class
 .. autoclass:: operator_csv_libs.images.Image
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``Operatorimage`` class
@@ -51,7 +46,6 @@ The ``Operatorimage`` class
 .. autoclass:: operator_csv_libs.operatorimage.Operatorimage
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``Package`` class
@@ -59,7 +53,6 @@ The ``Package`` class
 .. autoclass:: operator_csv_libs.package.Package
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
 
 The ``Channel`` class
@@ -67,7 +60,6 @@ The ``Channel`` class
 .. autoclass:: operator_csv_libs.package.Channel
    :members:
    :undoc-members:
-   :private-members:
    :inherited-members:
    
 .. toctree::

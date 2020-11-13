@@ -177,38 +177,6 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._get_operator_images">
-<code class="sig-name descname">_get_operator_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._get_operator_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>[Populate a list of all images that are used for the operator deployment]</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._get_related_images">
-<code class="sig-name descname">_get_related_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._get_related_images" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._setup_basic_logger">
-<code class="sig-name descname">_setup_basic_logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._setup_basic_logger" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_operand_images">
-<code class="sig-name descname">_update_operand_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_operand_images" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_operator_container_images">
-<code class="sig-name descname">_update_operator_container_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_operator_container_images" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_version_references">
-<code class="sig-name descname">_update_version_references</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_version_references" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update the version specifc fields based on self.version</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret">
 <code class="sig-name descname">add_image_pullsecret</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add image pull secret for all operator deployment deployments. Existing pull secrets will be kept</p>
@@ -407,37 +375,7 @@ Hacked together in a hurry, will probably be refactored to be more pythonic - if
 <dl class="py class">
 <dt id="operator_csv_libs.imagerepo.ArtifactoryRepo">
 <em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.imagerepo.</code><code class="sig-name descname">ArtifactoryRepo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">artifactory_base</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">artifactory_user</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">artifactory_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py attribute">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_base">
-<code class="sig-name descname">_artifactory_base</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_base" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_key">
-<code class="sig-name descname">_artifactory_key</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_key" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_user">
-<code class="sig-name descname">_artifactory_user</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_user" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_artifactory_repo">
-<code class="sig-name descname">_get_artifactory_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_artifactory_repo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_image_digest">
-<code class="sig-name descname">_get_raw_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_image_digest" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_manifest_list_digest">
-<code class="sig-name descname">_get_raw_manifest_list_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_manifest_list_digest" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
+<dd><dl class="py method">
 <dt id="operator_csv_libs.imagerepo.ArtifactoryRepo.get_image_digest">
 <code class="sig-name descname">get_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo.get_image_digest" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -475,16 +413,6 @@ Hacked together in a hurry, will probably be refactored to be more pythonic - if
 <dd><dl class="py attribute">
 <dt id="operator_csv_libs.imagerepo.QuayRepo.QUAY_BASE_URL">
 <code class="sig-name descname">QUAY_BASE_URL</code><em class="property"> = 'https://quay.io/api/v1/repository'</em><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo.QUAY_BASE_URL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.imagerepo.QuayRepo._get_digest">
-<code class="sig-name descname">_get_digest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manifest_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo._get_digest" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="operator_csv_libs.imagerepo.QuayRepo._get_quay_repo">
-<code class="sig-name descname">_get_quay_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo._get_quay_repo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
