@@ -51,5 +51,7 @@ jobs:
         echo "in here before commit"
         git add .
         echo "in here before commit"
+        git config user.email "evelio.sosau@ibm.com"
+        git config user.name "Evelio Sosa"
         git commit -m "update operator csv libs documentation"
         git push origin master
