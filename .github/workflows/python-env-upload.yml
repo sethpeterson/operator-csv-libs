@@ -40,7 +40,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
-        name: login to quay
+        name: Login to Quay
         run: |
           if [ "${{ github.event_name }}" != "pull_request" ]; then
             echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u "${{ secrets.QUAY_USER }}" --password-stdin

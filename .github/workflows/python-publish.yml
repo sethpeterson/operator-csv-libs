@@ -41,3 +41,12 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
+    -
+      name: Update Documentation
+      run: |
+        cd docs
+        make html
+        git add .
+        git commit -m "update operator csv libs documentation"
+        git push origin master
+
