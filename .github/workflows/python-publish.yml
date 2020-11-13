@@ -20,7 +20,7 @@ jobs:
     - name: Prepare version
       run: |
         # get release version
-        VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')
+        VERSION="v.1.6.7"
 
         # file and content that will be replaced
         PLACEHOLDER="version='default'"
