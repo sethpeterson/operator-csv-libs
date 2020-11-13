@@ -34,7 +34,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
-
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
@@ -45,7 +44,7 @@ jobs:
       name: Install sphinx
       run: |
         pip install -r requirements.txt
-        apt-get install python3-sphinx
+        pip install sphinx
     -
       name: Update Documentation
       run: |
