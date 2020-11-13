@@ -1,11 +1,808 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-      <!--
-      <meta http-equiv="refresh" content="0; url=https://eveliososa.github.io/_build/html/index.html">
-        -->
-    </head>
-  <body>
-      <p>Hello</p>
-  </body>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to Operator CSV Libs’s documentation! &mdash; Operator CSV Libs v1.6.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Operator CSV Libs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to Operator CSV Libs’s documentation!</a><ul>
+<li><a class="reference internal" href="#the-clusterserviceversion-class">The <code class="docutils literal notranslate"><span class="pre">ClusterServiceVersion</span></code> class</a></li>
+<li><a class="reference internal" href="#the-imagerepo-class">The <code class="docutils literal notranslate"><span class="pre">ImageRepo</span></code> class</a></li>
+<li><a class="reference internal" href="#the-artifactoryrepo-class">The <code class="docutils literal notranslate"><span class="pre">ArtifactoryRepo</span></code> class</a></li>
+<li><a class="reference internal" href="#the-quayrepo-class">The <code class="docutils literal notranslate"><span class="pre">QuayRepo</span></code> class</a></li>
+<li><a class="reference internal" href="#the-image-class">The <code class="docutils literal notranslate"><span class="pre">Image</span></code> class</a></li>
+<li><a class="reference internal" href="#the-operatorimage-class">The <code class="docutils literal notranslate"><span class="pre">Operatorimage</span></code> class</a></li>
+<li><a class="reference internal" href="#the-package-class">The <code class="docutils literal notranslate"><span class="pre">Package</span></code> class</a></li>
+<li><a class="reference internal" href="#the-channel-class">The <code class="docutils literal notranslate"><span class="pre">Channel</span></code> class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#index">Index</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Operator CSV Libs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to Operator CSV Libs’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-operator-csv-libs-s-documentation">
+<h1>Welcome to Operator CSV Libs’s documentation!<a class="headerlink" href="#welcome-to-operator-csv-libs-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-clusterserviceversion-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">ClusterServiceVersion</span></code> class<a class="headerlink" href="#the-clusterserviceversion-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.csv.</code><code class="sig-name descname">ClusterServiceVersion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">csv</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_version</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">replaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skiprange</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.LATEST_IMAGE_INDICATOR">
+<code class="sig-name descname">LATEST_IMAGE_INDICATOR</code><em class="property"> = '-latest'</em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.LATEST_IMAGE_INDICATOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.RELATED_IMAGE_IDENTIFIER">
+<code class="sig-name descname">RELATED_IMAGE_IDENTIFIER</code><em class="property"> = 'olm.relatedImage.'</em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.RELATED_IMAGE_IDENTIFIER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._get_operator_images">
+<code class="sig-name descname">_get_operator_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._get_operator_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>[Populate a list of all images that are used for the operator deployment]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._get_related_images">
+<code class="sig-name descname">_get_related_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._get_related_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._setup_basic_logger">
+<code class="sig-name descname">_setup_basic_logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._setup_basic_logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_operand_images">
+<code class="sig-name descname">_update_operand_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_operand_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_operator_container_images">
+<code class="sig-name descname">_update_operator_container_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_operator_container_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion._update_version_references">
+<code class="sig-name descname">_update_version_references</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion._update_version_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the version specifc fields based on self.version</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret">
+<code class="sig-name descname">add_image_pullsecret</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add image pull secret for all operator deployment deployments. Existing pull secrets will be kept</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>list</em>) – String or list of strings containing name of the pull secret to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.generate_spec_relatedImages">
+<code class="sig-name descname">generate_spec_relatedImages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.generate_spec_relatedImages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates spec.relatedImages based on information found in operator deployment annotations marked with ‘olm.relatedImage.*’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_annotation_related_images">
+<code class="sig-name descname">get_annotation_related_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_annotation_related_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of images found in ‘olm.relatedImages.*’ deployment annotations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a List of Images as defined in Images class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_formatted_csv">
+<code class="sig-name descname">get_formatted_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_formatted_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a stringified save ready formatted ClusterServiceVersion
+This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_operator_deployments">
+<code class="sig-name descname">get_operator_deployments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_version</span><span class="o">=</span><span class="default_value">'apps/v1'</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'Deployment'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_deployments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of kubernetes deployment objects constructed from the CSV deployments section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of kubernetes deployment objects</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_operator_images">
+<code class="sig-name descname">get_operator_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of images used for operator deployment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a List of Images as defined in Images class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_owned_crds">
+<code class="sig-name descname">get_owned_crds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_owned_crds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of owned CustomResourceDefinitions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of owned custom resource definitions as dict object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_replaces">
+<code class="sig-name descname">get_replaces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_replaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return String</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns the csv file name with previous version</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.get_updated_csv">
+<code class="sig-name descname">get_updated_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_updated_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the updated CSV object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>CSV with updated version and image information</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations">
+<code class="sig-name descname">set_deployments_annotations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set key with value passed in for each deployment in the CSV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>string</em>) – Key being search for in deployment annotations</p></li>
+<li><p><strong>value</strong> (<em>string</em>) – Value that will be assigned to the key passed in</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.set_image_pullsecret">
+<code class="sig-name descname">set_image_pullsecret</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_image_pullsecret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the image pull secret for all operator deployment deployments. Overwrites any existing pull secret</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>string</em><em>, </em><em>list</em>) – String or list of strings containing name of the pull secret to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.set_replaces">
+<code class="sig-name descname">set_replaces</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">replaces</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_replaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the release that this replaces</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>replaces</strong> (<em>string</em>) – The versioned name of the csv that this csv replaces</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.set_version">
+<code class="sig-name descname">set_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the target version for the CSV</p>
+<dl class="simple">
+<dt>Arguments:</dt><dd><p>version {string} – Target version in semver format X.Y.Z with optional -nnnn for pre-release</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-imagerepo-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">ImageRepo</span></code> class<a class="headerlink" href="#the-imagerepo-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.imagerepo.ImageRepo">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.imagerepo.</code><code class="sig-name descname">ImageRepo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ImageRepo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a class to provide a general interface to query container image registry servers.
+Hacked together in a hurry, will probably be refactored to be more pythonic - if there’s a better way to do this</p>
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ImageRepo.get_image_digest">
+<code class="sig-name descname">get_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ImageRepo.get_image_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ImageRepo.get_manifest_list_digest">
+<code class="sig-name descname">get_manifest_list_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ImageRepo.get_manifest_list_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ImageRepo.get_raw_manifest_list">
+<code class="sig-name descname">get_raw_manifest_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ImageRepo.get_raw_manifest_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the docker manifest list in json format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ManifestListNotFound</strong> – description</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>manifest.list.json content</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-artifactoryrepo-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">ArtifactoryRepo</span></code> class<a class="headerlink" href="#the-artifactoryrepo-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.imagerepo.</code><code class="sig-name descname">ArtifactoryRepo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">artifactory_base</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">artifactory_user</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">artifactory_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_base">
+<code class="sig-name descname">_artifactory_base</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_base" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_key">
+<code class="sig-name descname">_artifactory_key</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_user">
+<code class="sig-name descname">_artifactory_user</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._artifactory_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_artifactory_repo">
+<code class="sig-name descname">_get_artifactory_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_artifactory_repo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_image_digest">
+<code class="sig-name descname">_get_raw_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_image_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_manifest_list_digest">
+<code class="sig-name descname">_get_raw_manifest_list_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo._get_raw_manifest_list_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo.get_image_digest">
+<code class="sig-name descname">get_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo.get_image_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo.get_manifest_list_digest">
+<code class="sig-name descname">get_manifest_list_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo.get_manifest_list_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.ArtifactoryRepo.get_raw_manifest_list">
+<code class="sig-name descname">get_raw_manifest_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.ArtifactoryRepo.get_raw_manifest_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the docker manifest list in json format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ManifestListNotFound</strong> – description</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>manifest.list.json content</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-quayrepo-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">QuayRepo</span></code> class<a class="headerlink" href="#the-quayrepo-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.imagerepo.QuayRepo">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.imagerepo.</code><code class="sig-name descname">QuayRepo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="operator_csv_libs.imagerepo.QuayRepo.QUAY_BASE_URL">
+<code class="sig-name descname">QUAY_BASE_URL</code><em class="property"> = 'https://quay.io/api/v1/repository'</em><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo.QUAY_BASE_URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.QuayRepo._get_digest">
+<code class="sig-name descname">_get_digest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manifest_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo._get_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.QuayRepo._get_quay_repo">
+<code class="sig-name descname">_get_quay_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo._get_quay_repo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.QuayRepo.get_image_digest">
+<code class="sig-name descname">get_image_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo.get_image_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.imagerepo.QuayRepo.get_manifest_list_digest">
+<code class="sig-name descname">get_manifest_list_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.imagerepo.QuayRepo.get_manifest_list_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-image-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">Image</span></code> class<a class="headerlink" href="#the-image-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.images.Image">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.images.</code><code class="sig-name descname">Image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">image</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">deployment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">container</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_digest">
+<code class="sig-name descname">get_digest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns image digest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Digest in format &lt;type&gt;:&lt;hash&gt;</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_image">
+<code class="sig-name descname">get_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the full image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Full image in format &lt;repo&gt;/&lt;name&gt;[&#64;digest][:tag]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_image_name">
+<code class="sig-name descname">get_image_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_image_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the image name, stripped of repo and tag/digest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_image_repo">
+<code class="sig-name descname">get_image_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_image_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the image_repo section of the overall image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Image repo i.e. quay.io/myrepo]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_olm_name">
+<code class="sig-name descname">get_olm_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_olm_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the image. Typically associated with olm.relatedImage and spec.relatedImages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.get_tag">
+<code class="sig-name descname">get_tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the tag associated with an image if known</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tag</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.set_digest">
+<code class="sig-name descname">set_digest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">digest</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.set_digest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set image digest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>digest</strong> (<em>string</em>) – Digest in format &lt;type&gt;:&lt;hash&gt;</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.set_image_repo">
+<code class="sig-name descname">set_image_repo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.set_image_repo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.images.Image.set_tag">
+<code class="sig-name descname">set_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.images.Image.set_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set new tag for image. Will update self.image only if image is identified by tag, but not overwrite digest</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>string</em>) – New tag to set</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-operatorimage-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">Operatorimage</span></code> class<a class="headerlink" href="#the-operatorimage-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.operatorimage.Operatorimage">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.operatorimage.</code><code class="sig-name descname">Operatorimage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deployment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">container</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">image</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.container">
+<code class="sig-name descname">container</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.container" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.deployment">
+<code class="sig-name descname">deployment</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.deployment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.digest">
+<code class="sig-name descname">digest</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.image">
+<code class="sig-name descname">image</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.image_name">
+<code class="sig-name descname">image_name</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.image_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.image_repo">
+<code class="sig-name descname">image_repo</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.image_repo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.set_digest">
+<code class="sig-name descname">set_digest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">digest</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.set_digest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="operator_csv_libs.operatorimage.Operatorimage.tag">
+<code class="sig-name descname">tag</code><em class="property"> = None</em><a class="headerlink" href="#operator_csv_libs.operatorimage.Operatorimage.tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-package-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">Package</span></code> class<a class="headerlink" href="#the-package-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.package.Package">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.package.</code><code class="sig-name descname">Package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_channel</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="operator_csv_libs.package.Package.PACKAGE_FILE_FORMAT">
+<code class="sig-name descname">PACKAGE_FILE_FORMAT</code><em class="property"> = {'channels': [], 'defaultChannel': '{}-{}', 'packageName': ''}</em><a class="headerlink" href="#operator_csv_libs.package.Package.PACKAGE_FILE_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.create_channel">
+<code class="sig-name descname">create_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">current_csv</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.create_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.get_channel">
+<code class="sig-name descname">get_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.get_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.get_channels">
+<code class="sig-name descname">get_channels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.get_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.get_formatted">
+<code class="sig-name descname">get_formatted</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.get_formatted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.promote_channel">
+<code class="sig-name descname">promote_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">promote_from</span></em>, <em class="sig-param"><span class="n">promote_to</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.promote_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.set_default_channel">
+<code class="sig-name descname">set_default_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">default_channel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.set_default_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.set_operator">
+<code class="sig-name descname">set_operator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.set_operator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Package.update_channel">
+<code class="sig-name descname">update_channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">channel</span></em>, <em class="sig-param"><span class="n">new_csv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Package.update_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="the-channel-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">Channel</span></code> class<a class="headerlink" href="#the-channel-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="operator_csv_libs.package.Channel">
+<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.package.</code><code class="sig-name descname">Channel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">currentCSV</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Channel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="operator_csv_libs.package.Channel.get_current_csv">
+<code class="sig-name descname">get_current_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Channel.get_current_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Channel.get_name">
+<code class="sig-name descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Channel.get_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Channel.set_current_csv">
+<code class="sig-name descname">set_current_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_csv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Channel.set_current_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="operator_csv_libs.package.Channel.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.package.Channel.set_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+<div class="section" id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, CICD Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>
