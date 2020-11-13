@@ -33,18 +33,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine
+        pip install setuptools wheel twine sphinx
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         ls
-    -
-      name: Install sphinx
-      run: |
-        pip install -r requirements.txt
-        pip install sphinx
     -
       name: Update Documentation
       run: |
