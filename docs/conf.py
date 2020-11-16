@@ -22,7 +22,7 @@ copyright = '2020, CICD Team'
 author = 'CICD Team'
 
 # The full version, including alpha/beta/rc tags
-release = 'v1.6.0'
+release = 'default'
 
 
 # -- General configuration ---------------------------------------------------
