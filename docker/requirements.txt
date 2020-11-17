@@ -1,1 +1,0 @@
-git+git://github.com/multicloud-ops/operator-csv-libs.git@master
