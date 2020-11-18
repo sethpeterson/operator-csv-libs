@@ -22,19 +22,18 @@ class ImageRepo:
     def get_manifest_list_digest(self):
         return self.image_repo.get_manifest_list_digest()
 
-
     def get_image_digest(self):
         return self.image_repo.get_image_digest()
 
     def get_raw_manifest_list(self):
         """Return the docker manifest list in json format
-        Raises:
-            ManifestListNotFound: [description]
-        Returns:
-            DICT: manifest.list.json content
+
+        :raises ManifestListNotFound: description
+
+        :return: manifest.list.json content
+        :rtype: dict
         """
         return self.image_repo.get_raw_manifest_list()
-
 
 class ArtifactoryRepo:
     # Allow credentials to be shared between instances
@@ -92,7 +91,6 @@ class ArtifactoryRepo:
         r = self.image.get_image_repo().split('.')[0]
         return '{}/{}'.format(r, p)
 
-
     def _get_raw_image_digest(self):
         manifestpath = '/'.join([
                         self.artifactory_base,
@@ -107,7 +105,6 @@ class ArtifactoryRepo:
             return ArtifactoryPath.stat(manifest_path).sha256
         except FileNotFoundError as e:
             raise ManifestNotFound(e)
-
 
     def get_manifest_list_digest(self):
         # We know we're always querying for sha256
@@ -130,10 +127,11 @@ class ArtifactoryRepo:
 
     def get_raw_manifest_list(self):
         """Return the docker manifest list in json format
-        Raises:
-            ManifestListNotFound: [description]
-        Returns:
-            DICT: manifest.list.json content
+
+        :raises ManifestListNotFound: description
+
+        :return: manifest.list.json content
+        :rtype: dict
         """
 
         listpath = '/'.join([
@@ -154,7 +152,6 @@ class ArtifactoryRepo:
         return json.loads(f.read().decode('utf-8'))
 
 class QuayRepo:
-
     QUAY_BASE_URL = 'https://quay.io/api/v1/repository'
 
     def __init__(self, image):
@@ -165,7 +162,6 @@ class QuayRepo:
 
     def get_manifest_list_digest(self):
         return self._get_digest(manifest_list=True)
-
 
     def _get_digest(self, manifest_list):
         url = '/'.join([
@@ -199,8 +195,6 @@ class QuayRepo:
                     raise ManifestListNotFound('Tag {} is not manifest list'.format(self.image.get_tag()))
                 else:
                     raise ManifestNotFound('Tag {} is a manifest list'.format(self.image.get_tag()))
-
-
 
     def _get_quay_repo(self):
         r = self.image.get_image_repo().replace('quay.io/','')

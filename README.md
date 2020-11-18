@@ -3,7 +3,7 @@
 
 ## Usage
 
-Place `git+git://github.com/multicloud-ops/operator-csv-libs.git@master` in your requirements.txt file or run `pip install git+git://github.com/multicloud-ops/operator-csv-libs.git@master`. 
+Place `operator-csv-libs` in your requirements.txt file or run `pip install operator-csv-libs`. 
   
 Then import the library into your scrips using some form of an import statement:
 ```
