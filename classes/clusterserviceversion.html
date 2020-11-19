@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The ClusterServiceVersion class &mdash; Operator CSV Libs 1.6.1 documentation</title>
+  <title>The ClusterServiceVersion class &mdash; Operator CSV Libs 1.7.0 documentation</title>
   
 
   
@@ -281,6 +281,17 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 </dd></dl>
 
 <dl class="py method">
+<dt id="operator_csv_libs.csv.ClusterServiceVersion.set_container_image_annotation">
+<code class="sig-name descname">set_container_image_annotation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_container_image_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set metadata.annotations.containerImage with Image.image passed in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<a class="reference internal" href="image.html#operator_csv_libs.images.Image" title="operator_csv_libs.images.Image"><em>Image</em></a>) – Image that will be assigned to metadata.annotations.containerImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations">
 <code class="sig-name descname">set_deployments_annotations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set key with value passed in for each deployment in the CSV</p>
@@ -320,8 +331,9 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_version">
 <code class="sig-name descname">set_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the target version for the CSV</p>
-<dl class="simple">
-<dt>Arguments:</dt><dd><p>version {string} – Target version in semver format X.Y.Z with optional -nnnn for pre-release</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>version</strong> (<em>string</em>) – Target version in semver format X.Y.Z with optional -nnnn for pre-release</p>
 </dd>
 </dl>
 </dd></dl>

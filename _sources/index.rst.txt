@@ -1,7 +1,7 @@
 Welcome to Operator CSV Libs's documentation!
 =============================================
 
-**To use do the following:**
+**To use do one of the following:**
 
 * Place ``operator-csv-libs`` in your requirements.txt file.
 * Run ``pip install operator-csv-libs``. 
