@@ -213,6 +213,25 @@ class TestCSV(unittest.TestCase):
         testcsvWithoutParams.set_deployments_annotations('productVersion', newProductVersion)
         self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
 
+    def test_set_container_image_annotation(self):
+        testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
+        TEST_DUMMY_CSV = copy.deepcopy(DUMMY_CSV)
+        testImage = testcsvWithoutParams.get_operator_images()[0]
+
+        # set container image
+        testcsvWithoutParams.set_container_image_annotation(testImage)
+
+        # check to see that CSV was updated correctly
+        TEST_DUMMY_CSV['metadata']['annotations']['containerImage'] = testImage.image
+        self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
+        # test with containerImage already definded
+        TEST_DUMMY_CSV['metadata']['annotations']['containerImage'] = 'newContainerImage'
+        testcsvWithoutParamsDefined = ClusterServiceVersion(TEST_DUMMY_CSV)
+        TEST_DUMMY_CSV['metadata']['annotations']['containerImage'] = testImage.image
+        testcsvWithoutParamsDefined.set_container_image_annotation(testImage)
+        self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
+
     def test_set_version(self):
         testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
 
