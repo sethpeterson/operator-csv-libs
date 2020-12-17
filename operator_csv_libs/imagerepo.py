@@ -13,7 +13,7 @@ class ImageRepo:
         # Check for some well known repos
         if 'artifactory' in self.image.get_image_repo():
             self.image_repo = ArtifactoryRepo(self.image)
-        elif 'quay.io' in self.image.get_image_repo():
+        elif self.image.get_image_repo().startswith('quay.io/'):
             self.image_repo = QuayRepo(self.image)
 
         else:

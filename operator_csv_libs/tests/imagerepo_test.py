@@ -69,6 +69,15 @@ class TestImageRepo(unittest.TestCase):
         # check to see that digest is returned
         self.assertEqual(self.artifactoryImgRepoWithOsAuthentication.get_image_digest(), 'sha256:dummy_sha')
 
+class TestImageRepoQuayImage(unittest.TestCase):
+    def setUp(self):
+        self.quayImgWithDigest = Image(IMG_NAME, QUAY_IMAGE_WITH_DIGEST, DEPLOYMENT, CONTAINER)
+        # Initialize a general ImageRepo
+        self.quayImgRepo = ImageRepo(self.quayImgWithDigest)
+
+    def test_init(self):
+        # check quay images are identified correctly
+        self.assertIsInstance(self.quayImgRepo.image_repo, QuayRepo)
 
 class TestArtifactoryRepo(unittest.TestCase):
     def setUp(self):
