@@ -1,6 +1,6 @@
 from .images import Image
 from artifactory import ArtifactoryPath
-import os, sys, json
+import os, sys, json, subprocess
 import requests
 
 class ImageRepo:
@@ -15,6 +15,8 @@ class ImageRepo:
             self.image_repo = ArtifactoryRepo(self.image)
         elif self.image.get_image_repo().startswith('quay.io/'):
             self.image_repo = QuayRepo(self.image)
+        elif self.image.get_image_repo().startswith('docker.io'):
+            self.image_repo = DockerRepo(self.image)
 
         else:
             raise RepoTypeNotImplemented('Unknown repository type for image {}'.format(image.get_image()))
@@ -199,6 +201,55 @@ class QuayRepo:
     def _get_quay_repo(self):
         r = self.image.get_image_repo().replace('quay.io/','')
         return '/'.join([r, self.image.get_image_name()])
+
+class DockerRepo:
+    
+    def __init__(self,image):
+        self.image = image
+
+    def get_image_digest(self):
+        return self._get_digest(manifest_list=False)
+
+    def get_manifest_list_digest(self):
+        return self._get_digest(manifest_list=True)
+
+    def get_raw_manifest_list(self):
+        skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
+        skopeoCommand = skopeoCommand.replace('docker.io/', '')
+        print(skopeoCommand)
+        command = ["/bin/bash", "-c", skopeoCommand ]
+        try:
+            out = json.loads(subprocess.run(command, capture_output=True).stdout)
+            print(out['mediaType'])
+            if 'manifest.list' in out['mediaType']:
+                return out
+            else:
+                raise ManifestListNotFound(out)
+        except Exception as e:
+            raise ManifestListNotFound('error with skopeo command')
+
+
+    def _get_digest(self, manifest_list):
+        skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
+        command = ["/bin/bash", "-c", skopeoCommand ]
+        out = json.loads(subprocess.run(command, capture_output=True).stdout)
+        if 'manifest.list' in out['mediaType']:
+            if manifest_list:
+                shaCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
+                command = ["/bin/bash", "-c", shaCommand ]
+                out = (subprocess.run(command, capture_output=True).stdout).decode("utf-8")
+                out = out.split(' ')[0]
+                return "sha256:" + out
+            else:
+                pass
+        else:
+            skopeoCommand = "skopeo inspect --override-os linux docker://" + self.image.get_image()
+            command = ["/bin/bash", "-c", skopeoCommand ]
+            out = json.loads(subprocess.run(command, capture_output=True).stdout)
+            if manifest_list:
+                raise ManifestListNotFound("Manifest List does not exist")
+            else:
+                return out['Digest']
 
 class MissingCredentials(Exception):
     pass
