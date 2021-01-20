@@ -206,6 +206,9 @@ class DockerRepo:
     
     def __init__(self,image, docker_user=None, docker_key=None):
         self.image = image
+        self.org = image.get_image().split('/')[1]
+        self.repo = image.get_image_name()
+        self.tag = image.get_tag()
 
         if docker_user:
             self.docker_user = docker_user
@@ -231,54 +234,39 @@ class DockerRepo:
         return self._get_digest(manifest_list=True)
 
     def get_raw_manifest_list(self):
-        if self.docker_key is not None and self.docker_user is not None:
-            skopeoCommand = "skopeo inspect --creds " + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image()
-        else:
-            skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
-        skopeoCommand = skopeoCommand.replace('docker.io/', '')
-        print(skopeoCommand)
-        command = ["/bin/bash", "-c", skopeoCommand ]
-        try:
-            out = json.loads(subprocess.run(command, capture_output=True).stdout)
-            print(out['mediaType'])
-            if 'manifest.list' in out['mediaType']:
-                return out
-            else:
-                raise ManifestListNotFound(out)
-        except Exception as e:
-            raise ManifestListNotFound('error with skopeo command')
+        ## Get token
+        t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
+        token=t.json()['token']
 
+        ## check media type
+        headers={'accept':'application/vnd.docker.distribution.manifest.list.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+        m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+        
+        if 'manifest.list' in m.headers['Content-Type']:
+            return m.json()
+        else:
+            raise ManifestListNotFound('No manifest for: ' + self.image.get_image())
 
     def _get_digest(self, manifest_list):
-        if self.docker_key is not None and self.docker_user is not None:
-            skopeoCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image()
-        else:
-            skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
-        command = ["/bin/bash", "-c", skopeoCommand ]
-        out = json.loads(subprocess.run(command, capture_output=True).stdout)
-        if 'manifest.list' in out['mediaType']:
+        ## Get token
+        t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
+        token=t.json()['token']
+
+        ## check media type
+        headers={'accept':'application/vnd.docker.distribution.manifest.list.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+        m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+
+        if 'manifest.list' in m.headers['Content-Type']:
             if manifest_list:
-                if self.docker_key is not None and self.docker_user is not None:
-                    shaCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
-                else:
-                    shaCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
-                command = ["/bin/bash", "-c", shaCommand ]
-                out = (subprocess.run(command, capture_output=True).stdout).decode("utf-8")
-                out = out.split(' ')[0]
-                return "sha256:" + out
-            else:
-                pass
+                return m.headers['Docker-Content-Digest']
         else:
-            if self.docker_key is not None and self.docker_user is not None:
-                skopeoCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux docker://" + self.image.get_image()
-            else:
-                skopeoCommand = "skopeo inspect --override-os linux docker://" + self.image.get_image()
-            command = ["/bin/bash", "-c", skopeoCommand ]
-            out = json.loads(subprocess.run(command, capture_output=True).stdout)
             if manifest_list:
                 raise ManifestListNotFound("Manifest List does not exist")
             else:
-                return out['Digest']
+                ## Get the proper digest for single arch image - need the correct header
+                headers={'accept':'application/vnd.docker.distribution.manifest.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+                m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+                return m.headers['Docker-Content-Digest']
 
 class MissingCredentials(Exception):
     pass
