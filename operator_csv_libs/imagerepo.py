@@ -206,8 +206,23 @@ class DockerRepo:
     
     def __init__(self,image, docker_user=None, docker_key=None):
         self.image = image
-        self.docker_user = docker_user
-        self.docker_key = docker_key
+
+        if docker_user:
+            self.docker_user = docker_user
+        elif 'DOCKER_USER' in os.environ:
+            # Go to environment variables if we don't have them as class variable either
+            self._docker_user = os.getenv('DOCKER_USER')
+            self.docker_user = self._docker_user
+        else:
+            self.docker_user = None
+
+        if docker_key:
+            self.docker_key = docker_key
+        elif 'DOCKER_KEY' in os.environ:
+            self._docker_key = os.getenv('DOCKER_KEY')
+            self.docker_key = self._docker_key
+        else:
+            self.docker_key = None
 
     def get_image_digest(self):
         return self._get_digest(manifest_list=False)
