@@ -204,8 +204,10 @@ class QuayRepo:
 
 class DockerRepo:
     
-    def __init__(self,image):
+    def __init__(self,image, docker_user=None, docker_key=None):
         self.image = image
+        self.docker_user = docker_user
+        self.docker_key = docker_key
 
     def get_image_digest(self):
         return self._get_digest(manifest_list=False)
@@ -214,7 +216,10 @@ class DockerRepo:
         return self._get_digest(manifest_list=True)
 
     def get_raw_manifest_list(self):
-        skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
+        if self.docker_key is not None and self.docker_user is not None:
+            skopeoCommand = "skopeo inspect --creds " + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image()
+        else:
+            skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
         skopeoCommand = skopeoCommand.replace('docker.io/', '')
         print(skopeoCommand)
         command = ["/bin/bash", "-c", skopeoCommand ]
@@ -230,12 +235,18 @@ class DockerRepo:
 
 
     def _get_digest(self, manifest_list):
-        skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
+        if self.docker_key is not None and self.docker_user is not None:
+            skopeoCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image()
+        else:
+            skopeoCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image()
         command = ["/bin/bash", "-c", skopeoCommand ]
         out = json.loads(subprocess.run(command, capture_output=True).stdout)
         if 'manifest.list' in out['mediaType']:
             if manifest_list:
-                shaCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
+                if self.docker_key is not None and self.docker_user is not None:
+                    shaCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
+                else:
+                    shaCommand = "skopeo inspect --override-os linux --raw docker://" + self.image.get_image() + " | shasum -a 256"
                 command = ["/bin/bash", "-c", shaCommand ]
                 out = (subprocess.run(command, capture_output=True).stdout).decode("utf-8")
                 out = out.split(' ')[0]
@@ -243,7 +254,10 @@ class DockerRepo:
             else:
                 pass
         else:
-            skopeoCommand = "skopeo inspect --override-os linux docker://" + self.image.get_image()
+            if self.docker_key is not None and self.docker_user is not None:
+                skopeoCommand = "skopeo inspect --creds" + self.docker_user + ":" + self.docker_key + " --override-os linux docker://" + self.image.get_image()
+            else:
+                skopeoCommand = "skopeo inspect --override-os linux docker://" + self.image.get_image()
             command = ["/bin/bash", "-c", skopeoCommand ]
             out = json.loads(subprocess.run(command, capture_output=True).stdout)
             if manifest_list:
