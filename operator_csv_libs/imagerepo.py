@@ -1,6 +1,6 @@
 from .images import Image
 from artifactory import ArtifactoryPath
-import os, sys, json, subprocess
+import os, sys, json
 import requests
 
 class ImageRepo:
