@@ -203,29 +203,15 @@ class QuayRepo:
         return '/'.join([r, self.image.get_image_name()])
 
 class DockerRepo:
-    
-    def __init__(self,image, docker_user=None, docker_key=None):
+    """ This class provides an interface for docker hub images allowing one to query image and manifest list digests
+        as well as get the raw manifest list in json format.
+    """
+
+    def __init__(self,image):
         self.image = image
         self.org = image.get_image().split('/')[1]
         self.repo = image.get_image_name()
         self.tag = image.get_tag()
-
-        if docker_user:
-            self.docker_user = docker_user
-        elif 'DOCKER_USER' in os.environ:
-            # Go to environment variables if we don't have them as class variable either
-            self._docker_user = os.getenv('DOCKER_USER')
-            self.docker_user = self._docker_user
-        else:
-            self.docker_user = None
-
-        if docker_key:
-            self.docker_key = docker_key
-        elif 'DOCKER_KEY' in os.environ:
-            self._docker_key = os.getenv('DOCKER_KEY')
-            self.docker_key = self._docker_key
-        else:
-            self.docker_key = None
 
     def get_image_digest(self):
         return self._get_digest(manifest_list=False)
@@ -234,6 +220,13 @@ class DockerRepo:
         return self._get_digest(manifest_list=True)
 
     def get_raw_manifest_list(self):
+        """ Return the docker manifest list in json format
+        
+        :raises ManifestListNotFound: No manifest list exists for the specified image.
+
+        :returns: manifest.list.json content
+        :rtype: dict
+        """
         ## Get token
         t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
         token=t.json()['token']
@@ -248,6 +241,13 @@ class DockerRepo:
             raise ManifestListNotFound('No manifest for: ' + self.image.get_image())
 
     def _get_digest(self, manifest_list):
+        """ Return the digest of the docker image or manifest list
+
+        :raises ManifestListNotFound: if manifest list is requested but it does not exist
+
+        :return: docker manifest/manifest list digest
+        :rtype: string
+        """
         ## Get token
         t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
         token=t.json()['token']

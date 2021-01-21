@@ -2,12 +2,13 @@ import unittest
 import os
 
 from unittest.mock import patch
-from ..imagerepo import ImageRepo, ArtifactoryRepo, QuayRepo
+from ..imagerepo import ImageRepo, ArtifactoryRepo, QuayRepo, DockerRepo
 from ..images import Image
 
 IMG_NAME = 'dummyImageName'
 IMAGE_WITH_DIGEST = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:dummy_sha'
 QUAY_IMAGE_WITH_DIGEST = 'quay.io/hybridappio/ham-application-assembler@sha256:dummy_sha'
+DOCKER_IMAGE_WITH_DIGEST = 'docker.io/ibmcom/ibm-operator-catalog@sha256:dummy_sha'
 IMAGE_WITH_TAG = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog:release-2.0'
 IMAGE_WITHOUT_TAG = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog'
 DEPLOYMENT = 'dummyDeploymentName'
@@ -15,6 +16,7 @@ CONTAINER = 'dummyContainerName'
 
 ARTIFACTORY_REPO = 'hyc-cp4mcm-team-docker-local/cicd/cp4mcm'
 QUAY_REPO = 'hybridappio/ham-application-assembler'
+DOCKER_REPO = 'docker.io/ibmcom'
 
 DUMMY_ARTIFACTORY_CONFIG = {
     'artifactory_user' : 'dummyArtifactoryUser',
@@ -166,3 +168,29 @@ class TestQuayRepo(unittest.TestCase):
 
     def test__get_quay_repo(self):
         self.assertEqual(self.quayImgRepo._get_quay_repo(), QUAY_REPO)
+
+class TestDockerRepo(unittest.TestCase):
+    def setUp(self):
+        # set up quay image with its image repo object
+        self.dockerImgWithDigest = Image(IMG_NAME, DOCKER_IMAGE_WITH_DIGEST, DEPLOYMENT, CONTAINER)
+        self.dockerImgRepo = DockerRepo(self.dockerImgWithDigest)
+
+    def test_init(self):
+        # check to see that image was initialized correctly
+        self.assertEqual(self.dockerImgRepo.image, self.dockerImgWithDigest)
+
+    @patch.object(DockerRepo, '_get_digest')
+    def test_get_image_digest(self, mock_DockerRepo):
+        # mock api call
+        mock_DockerRepo.return_value = 'sha256:dummy_sha'
+
+        # check to see that digest is returned
+        self.assertEqual(self.dockerImgRepo.get_image_digest(), 'sha256:dummy_sha')
+
+    @patch.object(DockerRepo, '_get_digest')
+    def test_get_manifest_list_digest(self, mock_DockerRepo):
+        # mock api call
+        mock_DockerRepo.return_value = 'sha256:dummy_sha'
+
+        # check to see that digest is returned
+        self.assertEqual(self.dockerImgRepo.get_manifest_list_digest(), 'sha256:dummy_sha')
