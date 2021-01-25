@@ -15,6 +15,8 @@ class ImageRepo:
             self.image_repo = ArtifactoryRepo(self.image)
         elif self.image.get_image_repo().startswith('quay.io/'):
             self.image_repo = QuayRepo(self.image)
+        elif self.image.get_image_repo().startswith('docker.io'):
+            self.image_repo = DockerRepo(self.image)
 
         else:
             raise RepoTypeNotImplemented('Unknown repository type for image {}'.format(image.get_image()))
@@ -199,6 +201,72 @@ class QuayRepo:
     def _get_quay_repo(self):
         r = self.image.get_image_repo().replace('quay.io/','')
         return '/'.join([r, self.image.get_image_name()])
+
+class DockerRepo:
+    """ This class provides an interface for docker hub images allowing one to query image and manifest list digests
+        as well as get the raw manifest list in json format.
+    """
+
+    def __init__(self,image):
+        self.image = image
+        self.org = image.get_image().split('/')[1]
+        self.repo = image.get_image_name()
+        self.tag = image.get_tag()
+
+    def get_image_digest(self):
+        return self._get_digest(manifest_list=False)
+
+    def get_manifest_list_digest(self):
+        return self._get_digest(manifest_list=True)
+
+    def get_raw_manifest_list(self):
+        """ Return the docker manifest list in json format
+        
+        :raises ManifestListNotFound: No manifest list exists for the specified image.
+
+        :returns: manifest.list.json content
+        :rtype: dict
+        """
+        ## Get token
+        t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
+        token=t.json()['token']
+
+        ## check media type
+        headers={'accept':'application/vnd.docker.distribution.manifest.list.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+        m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+        
+        if 'manifest.list' in m.headers['Content-Type']:
+            return m.json()
+        else:
+            raise ManifestListNotFound('No manifest for: ' + self.image.get_image())
+
+    def _get_digest(self, manifest_list):
+        """ Return the digest of the docker image or manifest list
+
+        :raises ManifestListNotFound: if manifest list is requested but it does not exist
+
+        :return: docker manifest/manifest list digest
+        :rtype: string
+        """
+        ## Get token
+        t=requests.get('https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'.format(org=self.org, repo=self.repo))
+        token=t.json()['token']
+
+        ## check media type
+        headers={'accept':'application/vnd.docker.distribution.manifest.list.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+        m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+
+        if 'manifest.list' in m.headers['Content-Type']:
+            if manifest_list:
+                return m.headers['Docker-Content-Digest']
+        else:
+            if manifest_list:
+                raise ManifestListNotFound("Manifest List does not exist")
+            else:
+                ## Get the proper digest for single arch image - need the correct header
+                headers={'accept':'application/vnd.docker.distribution.manifest.v2+json', 'Authorization': 'Bearer {}'.format(token)}
+                m=requests.get('https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'.format(org=self.org,repo=self.repo,tag=self.tag), headers=headers)
+                return m.headers['Docker-Content-Digest']
 
 class MissingCredentials(Exception):
     pass
