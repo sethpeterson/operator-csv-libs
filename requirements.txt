@@ -1,5 +1,5 @@
 pyyaml==5.4.1
-pygithub==1.53
+pygithub==1.54.1
 dohq-artifactory==0.7.508
 slack_log_handler==0.3.0
 requests==2.25.0
