@@ -309,6 +309,9 @@ spec:
                 productVersion: '2.1'
               labels:
                 name: ibm-management-orchestrator
+                app.kubernetes.io/name: ibm-management-orchestrator
+                app.kubernetes.io/instance: ibm-management-orchestrator
+                app.kubernetes.io/managed-by: ibm-management-orchestrator
             spec:
               affinity:
                 nodeAffinity:

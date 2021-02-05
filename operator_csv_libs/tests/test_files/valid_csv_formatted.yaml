@@ -164,7 +164,6 @@ metadata:
           }
         }
       ]
-
     capabilities: Basic Install
     olm.skipRange: <2.1.1-202009111050
   labels:

@@ -170,7 +170,9 @@ class ClusterServiceVersion:
             This allows maintaining the format of the `alm-examples: |-` block
         """
         yaml.add_representer(_literal, _literal_presenter)
-        return yaml.dump(self.get_updated_csv(), default_flow_style=False)
+        formatted_csv = self.get_updated_csv()
+        formatted_csv['metadata']['annotations']['alm-examples'] = _literal(formatted_csv['metadata']['annotations']['alm-examples'])
+        return yaml.dump(formatted_csv, default_flow_style=False)
 
     def get_replaces(self):
         """ Return String

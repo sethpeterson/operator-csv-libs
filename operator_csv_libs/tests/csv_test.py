@@ -2,7 +2,7 @@ import unittest
 import pytest
 import copy
 import os, yaml
-from ..csv import ClusterServiceVersion
+from ..csv import ClusterServiceVersion, _literal, _literal_presenter
 from ..images import Image
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -503,6 +503,10 @@ class TestCSV(unittest.TestCase):
     def test__get_formatted_csv(self):
         # Read in sample files
         with open(THIS_DIR + '/test_files/valid_csv_formatted.yaml', 'r') as stream:
+            csv_sample_formatted = yaml.safe_load(stream)
+        
+        # Read in sample files
+        with open(THIS_DIR + '/test_files/valid_csv.yaml', 'r') as stream:
             csv_sample = yaml.safe_load(stream)
 
         c = ClusterServiceVersion(csv_sample)
@@ -511,10 +515,12 @@ class TestCSV(unittest.TestCase):
         self.maxDiff = None
 
         # Ensure that data has not been changed
-        self.assertDictEqual(yaml.safe_load(c.get_formatted_csv()), csv_sample)
+        self.assertDictEqual(yaml.safe_load(c.get_formatted_csv()), csv_sample_formatted)
 
         # Ensure that format has been maintained
-        self.assertEqual(c.get_formatted_csv(), yaml.dump(csv_sample, default_flow_style=False))
+        yaml.add_representer(_literal, _literal_presenter)
+        csv_sample_formatted['metadata']['annotations']['alm-examples'] = _literal(csv_sample_formatted['metadata']['annotations']['alm-examples'])
+        self.assertEqual(c.get_formatted_csv(), yaml.dump(csv_sample_formatted, default_flow_style=False))
 
     def test__setup_basic_logger(self):
         # should not be tested because it only sets up logger
