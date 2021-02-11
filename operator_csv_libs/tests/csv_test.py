@@ -278,7 +278,7 @@ class TestCSV(unittest.TestCase):
     def test_add_image_pullsecret(self):
         testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
         TEST_DUMMY_CSV = copy.deepcopy(DUMMY_CSV)
-        testDummyImagePullSecrets = []
+        testDummyImagePullSecrets = TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['spec']['imagePullSecrets']
 
         # check to see if one image pull secret will be added
         testDummyImagePullSecrets.append({'name': 'newImagePullSecretsName'})
@@ -287,12 +287,16 @@ class TestCSV(unittest.TestCase):
         self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
 
         # check to see if it will add if image pull secrets does not exists
+        testDummyImagePullSecrets = []
+        testDummyImagePullSecrets.append({'name': 'newImagePullSecretsName'})
+        TEST_DUMMY_CSV['spec']['install']['spec']['deployments'][0]['spec']['template']['spec']['imagePullSecrets'] = testDummyImagePullSecrets
         testcsvWithoutParams.csv['spec']['install']['spec']['deployments'][0]['spec']['template']['spec'].pop('imagePullSecrets')
         self.assertEqual('imagePullSecrets' not in testcsvWithoutParams.csv['spec']['install']['spec']['deployments'][0]['spec']['template']['spec'], True)
         testcsvWithoutParams.add_image_pullsecret('newImagePullSecretsName')
         self.assertEqual(testcsvWithoutParams.csv, TEST_DUMMY_CSV)
 
         # check to see if it will add if more than one image pull secret
+        testcsvWithoutParams.csv['spec']['install']['spec']['deployments'][0]['spec']['template']['spec'].pop('imagePullSecrets')
         testcsvWithoutParams.add_image_pullsecret(['newImagePullSecretsName1', 'newImagePullSecretsName2', 'newImagePullSecretsName3'])
         testDummyImagePullSecrets[0]['name'] = 'newImagePullSecretsName1'
         testDummyImagePullSecrets.append({'name': 'newImagePullSecretsName2'})
@@ -493,7 +497,7 @@ class TestCSV(unittest.TestCase):
 
                 # Ensure we only got a single deployment
                 self.assertEqual(len(deployments), 1)
-                
+
                 # Ensure deployment is valid
                 self.assertDictEqual(deployments[0], deployment_sample)
 
