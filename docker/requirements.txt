@@ -1,1 +1,2 @@
 git+git://github.com/multicloud-ops/operator-csv-libs.git@master
+git+git://github.com/multicloud-ops/PyGithubFork.git@main
