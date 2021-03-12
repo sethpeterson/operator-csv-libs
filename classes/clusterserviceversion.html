@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>The ClusterServiceVersion class &mdash; Operator CSV Libs 1.8.1 documentation</title>
+  <title>The ClusterServiceVersion class &mdash; Operator CSV Libs 1.8.2 documentation</title>
   
 
   
@@ -165,20 +165,20 @@
 <h1>The <code class="docutils literal notranslate"><span class="pre">ClusterServiceVersion</span></code> class<a class="headerlink" href="#the-clusterserviceversion-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion">
-<em class="property">class </em><code class="sig-prename descclassname">operator_csv_libs.csv.</code><code class="sig-name descname">ClusterServiceVersion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">csv</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_version</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">replaces</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skiprange</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">logger</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">operator_csv_libs.csv.</span></code><code class="sig-name descname"><span class="pre">ClusterServiceVersion</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skiprange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="py attribute">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.LATEST_IMAGE_INDICATOR">
-<code class="sig-name descname">LATEST_IMAGE_INDICATOR</code><em class="property"> = '-latest'</em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.LATEST_IMAGE_INDICATOR" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">LATEST_IMAGE_INDICATOR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'-latest'</span></em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.LATEST_IMAGE_INDICATOR" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.RELATED_IMAGE_IDENTIFIER">
-<code class="sig-name descname">RELATED_IMAGE_IDENTIFIER</code><em class="property"> = 'olm.relatedImage.'</em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.RELATED_IMAGE_IDENTIFIER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">RELATED_IMAGE_IDENTIFIER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'olm.relatedImage.'</span></em><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.RELATED_IMAGE_IDENTIFIER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret">
-<code class="sig-name descname">add_image_pullsecret</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add_image_pullsecret</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.add_image_pullsecret" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add image pull secret for all operator deployment deployments. Existing pull secrets will be kept</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -189,13 +189,13 @@
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.generate_spec_relatedImages">
-<code class="sig-name descname">generate_spec_relatedImages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.generate_spec_relatedImages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">generate_spec_relatedImages</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.generate_spec_relatedImages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates spec.relatedImages based on information found in operator deployment annotations marked with ‘olm.relatedImage.*’</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_annotation_related_images">
-<code class="sig-name descname">get_annotation_related_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_annotation_related_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_annotation_related_images</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_annotation_related_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of images found in ‘olm.relatedImages.*’ deployment annotations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -209,14 +209,14 @@
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_formatted_csv">
-<code class="sig-name descname">get_formatted_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_formatted_csv" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_formatted_csv</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_formatted_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a stringified save ready formatted ClusterServiceVersion
 This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_operator_deployments">
-<code class="sig-name descname">get_operator_deployments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_version</span><span class="o">=</span><span class="default_value">'apps/v1'</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'Deployment'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_deployments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_operator_deployments</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'apps/v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Deployment'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_deployments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of kubernetes deployment objects constructed from the CSV deployments section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -230,7 +230,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_operator_images">
-<code class="sig-name descname">get_operator_images</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_operator_images</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_operator_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of images used for operator deployment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -244,7 +244,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_owned_crds">
-<code class="sig-name descname">get_owned_crds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_owned_crds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_owned_crds</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_owned_crds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of owned CustomResourceDefinitions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -258,7 +258,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_replaces">
-<code class="sig-name descname">get_replaces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_replaces" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_replaces</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_replaces" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return String</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -272,7 +272,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.get_updated_csv">
-<code class="sig-name descname">get_updated_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_updated_csv" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_updated_csv</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.get_updated_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the updated CSV object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -286,7 +286,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_container_image_annotation">
-<code class="sig-name descname">set_container_image_annotation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_container_image_annotation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_container_image_annotation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_container_image_annotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set metadata.annotations.containerImage with Image.image passed in</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,7 +297,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations">
-<code class="sig-name descname">set_deployments_annotations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_deployments_annotations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_deployments_annotations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set key with value passed in for each deployment in the CSV</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -311,7 +311,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_image_pullsecret">
-<code class="sig-name descname">set_image_pullsecret</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_image_pullsecret" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_image_pullsecret</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_image_pullsecret" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the image pull secret for all operator deployment deployments. Overwrites any existing pull secret</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -322,7 +322,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_replaces">
-<code class="sig-name descname">set_replaces</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">replaces</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_replaces" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_replaces</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">replaces</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_replaces" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the release that this replaces</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -333,7 +333,7 @@ This allows maintaining the format of the <cite>alm-examples: |-</cite> block</p
 
 <dl class="py method">
 <dt id="operator_csv_libs.csv.ClusterServiceVersion.set_version">
-<code class="sig-name descname">set_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_version" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">set_version</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#operator_csv_libs.csv.ClusterServiceVersion.set_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the target version for the CSV</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
