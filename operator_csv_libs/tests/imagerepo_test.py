@@ -1,14 +1,15 @@
 import unittest
 import os
-
+import httpretty
 from unittest.mock import patch
-from ..imagerepo import ImageRepo, ArtifactoryRepo, QuayRepo, DockerRepo
+from ..imagerepo import ImageRepo, ArtifactoryRepo, QuayRepo, DockerRepo, ManifestNotFound
 from ..images import Image
 
 IMG_NAME = 'dummyImageName'
 IMAGE_WITH_DIGEST = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog@sha256:dummy_sha'
-QUAY_IMAGE_WITH_DIGEST = 'quay.io/hybridappio/ham-application-assembler@sha256:dummy_sha'
-DOCKER_IMAGE_WITH_DIGEST = 'docker.io/ibmcom/ibm-operator-catalog@sha256:dummy_sha'
+QUAY_IMAGE_WITH_TAG = 'quay.io/hybridappio/ham-application-assembler:dummy_tag'
+DOCKER_IMAGE_WITH_MANIFEST = 'docker.io/ibmcom/ibm-operator-catalog:with_manifest'
+DOCKER_IMAGE_WITH_MANIFEST_LIST = 'docker.io/ibmcom/ibm-operator-catalog:with_manifest_list'
 IMAGE_WITH_TAG = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog:release-2.0'
 IMAGE_WITHOUT_TAG = 'hyc-cp4mcm-team-docker-local.artifactory.swg-devops.com/cicd/cp4mcm/cp4mcm-orchestrator-catalog'
 DEPLOYMENT = 'dummyDeploymentName'
@@ -29,6 +30,9 @@ DUMMY_OS_ARTIFACTORY_CONFIG = {
     'artifactory_key' : 'dummyOsArtifactoryKey',
     'artifactory_base' : 'dummyOsArtifactoryBase'
 }
+
+token_path = 'https://auth.docker.io/token?scope=repository%3A{org}%2F{repo}%3Apull&service=registry.docker.io'
+digest_media_type_path = 'https://registry-1.docker.io/v2/{org}/{repo}/manifests/{tag}'
 
 class TestImageRepo(unittest.TestCase):
     def setUp(self):
@@ -73,7 +77,7 @@ class TestImageRepo(unittest.TestCase):
 
 class TestImageRepoQuayImage(unittest.TestCase):
     def setUp(self):
-        self.quayImgWithDigest = Image(IMG_NAME, QUAY_IMAGE_WITH_DIGEST, DEPLOYMENT, CONTAINER)
+        self.quayImgWithDigest = Image(IMG_NAME, QUAY_IMAGE_WITH_TAG, DEPLOYMENT, CONTAINER)
         # Initialize a general ImageRepo
         self.quayImgRepo = ImageRepo(self.quayImgWithDigest)
 
@@ -138,59 +142,105 @@ class TestArtifactoryRepo(unittest.TestCase):
 
 class TestQuayRepo(unittest.TestCase):
     def setUp(self):
-        # set up quay image with its image repo object
-        self.quayImgWithDigest = Image(IMG_NAME, QUAY_IMAGE_WITH_DIGEST, DEPLOYMENT, CONTAINER)
-        self.quayImgRepo = QuayRepo(self.quayImgWithDigest)
+        # Enable httpretty
+        httpretty.enable()
+        httpretty.reset()
+
+        # Mock requests
+        httpretty.register_uri(
+            method=httpretty.GET,
+            uri='https://quay.io/api/v1/repository/{repo}/tag/?onlyActiveTags=true&specificTag={tag}'.format(
+                repo=QUAY_REPO,
+                tag='dummy_tag'
+            ),
+            body='{ "tags": [ { "is_manifest_list" : true, "manifest_digest" : "sha256:dummy_sha" } ] }'
+        )
+
+        # Set up quay image with its image repo object
+        self.quayImgWithTag = Image(IMG_NAME, QUAY_IMAGE_WITH_TAG, DEPLOYMENT, CONTAINER)
+        self.quayImgRepo = QuayRepo(self.quayImgWithTag)
 
     def test_init(self):
-        # check to see that image was initialized correctly
-        self.assertEqual(self.quayImgRepo.image, self.quayImgWithDigest)
+        # Check to see that image was initialized correctly
+        self.assertEqual(self.quayImgRepo.image, self.quayImgWithTag)
 
-    @patch.object(QuayRepo, '_get_digest')
-    def test_get_image_digest(self, mock_QuayRepo):
-        # mock api call
-        mock_QuayRepo.return_value = 'sha256:dummy_sha'
+    def test_get_image_digest(self):
+        # Check to see that digest is returned
+        try:
+            self.quayImgRepo.get_image_digest()
+        except ManifestNotFound:
+            self.assertEqual(True, True)
 
-        # check to see that digest is returned
-        self.assertEqual(self.quayImgRepo.get_image_digest(), 'sha256:dummy_sha')
-
-    @patch.object(QuayRepo, '_get_digest')
-    def test_get_manifest_list_digest(self, mock_QuayRepo):
-        # mock api call
-        mock_QuayRepo.return_value = 'sha256:dummy_sha'
-
-        # check to see that digest is returned
+    def test_get_manifest_list_digest(self):
+        # Check to see that digest is returned
         self.assertEqual(self.quayImgRepo.get_manifest_list_digest(), 'sha256:dummy_sha')
-
-    def test__get_digest(self):
-         # should not be tested because then we would need to test API call
-        self.assertEqual(True, True)
 
     def test__get_quay_repo(self):
         self.assertEqual(self.quayImgRepo._get_quay_repo(), QUAY_REPO)
 
+    def tearDown(self):
+        httpretty.disable()
+
 class TestDockerRepo(unittest.TestCase):
     def setUp(self):
-        # set up quay image with its image repo object
-        self.dockerImgWithDigest = Image(IMG_NAME, DOCKER_IMAGE_WITH_DIGEST, DEPLOYMENT, CONTAINER)
-        self.dockerImgRepo = DockerRepo(self.dockerImgWithDigest)
+        # Enable httpretty
+        httpretty.enable()
+        httpretty.reset()
+
+        # Mock requests
+        headers = {
+            'accept': [
+                'application/vnd.docker.distribution.manifest.list.v2+json',
+                'application/vnd.docker.distribution.manifest.v2+json'
+            ],
+            'Authorization': 'Bearer dummy_token'
+        }
+
+        httpretty.register_uri(
+            method=httpretty.GET,
+            uri=token_path.format(org='ibmcom', repo='ibm-operator-catalog'),
+            body='{ "token": "dummy_token" }'
+        )
+
+        httpretty.register_uri(
+            method=httpretty.GET,
+            uri=digest_media_type_path.format(org='ibmcom', repo='ibm-operator-catalog', tag='with_manifest_list'),
+            body='"sha256:dummy_raw_sha"',
+            headers=headers,
+            content_type='manifest.list',
+            adding_headers={"Docker-Content-Digest": "sha256:dummy_sha"}
+        )
+
+        httpretty.register_uri(
+            method=httpretty.GET,
+            uri=digest_media_type_path.format(org='ibmcom', repo='ibm-operator-catalog', tag='with_manifest'),
+            body='"sha256:dummy_raw_sha"',
+            headers=headers,
+            content_type='manifest',
+            adding_headers={"Docker-Content-Digest": "sha256:dummy_sha"}
+        )
+
+        # Set up docker images
+        self.dockerImgWithManifestList = Image(IMG_NAME, DOCKER_IMAGE_WITH_MANIFEST_LIST, DEPLOYMENT, CONTAINER)
+        self.dockerImgWithManifest = Image(IMG_NAME, DOCKER_IMAGE_WITH_MANIFEST, DEPLOYMENT, CONTAINER)
+        self.dockerImgRepoManifestList = ImageRepo(self.dockerImgWithManifestList)
+        self.dockerImgRepoManifest = ImageRepo(self.dockerImgWithManifest)
 
     def test_init(self):
-        # check to see that image was initialized correctly
-        self.assertEqual(self.dockerImgRepo.image, self.dockerImgWithDigest)
+        # Check to see that image was initialized correctly
+        self.assertEqual(self.dockerImgRepoManifest.image, self.dockerImgWithManifest)
 
-    @patch.object(DockerRepo, '_get_digest')
-    def test_get_image_digest(self, mock_DockerRepo):
-        # mock api call
-        mock_DockerRepo.return_value = 'sha256:dummy_sha'
+    def test_get_image_digest(self):
+        # Check to see that digest is returned
+        self.assertEqual(self.dockerImgRepoManifest.get_image_digest(), 'sha256:dummy_sha')
 
-        # check to see that digest is returned
-        self.assertEqual(self.dockerImgRepo.get_image_digest(), 'sha256:dummy_sha')
+    def test_get_manifest_list_digest(self):
+        # Check to see that digest is returned
+        self.assertEqual(self.dockerImgRepoManifestList.get_manifest_list_digest(), 'sha256:dummy_sha')
 
-    @patch.object(DockerRepo, '_get_digest')
-    def test_get_manifest_list_digest(self, mock_DockerRepo):
-        # mock api call
-        mock_DockerRepo.return_value = 'sha256:dummy_sha'
+    def test_get_raw_manifest_list(self):
+        # Check to see that digest is returned
+        self.assertEqual(self.dockerImgRepoManifestList.get_raw_manifest_list(), 'sha256:dummy_raw_sha')
 
-        # check to see that digest is returned
-        self.assertEqual(self.dockerImgRepo.get_manifest_list_digest(), 'sha256:dummy_sha')
+    def tearDown(self):
+        httpretty.disable()

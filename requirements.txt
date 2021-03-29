@@ -4,3 +4,4 @@ dohq-artifactory==0.7.508
 slack_log_handler==0.3.0
 requests==2.25.1
 pytest==6.2.2
+httpretty==1.0.5

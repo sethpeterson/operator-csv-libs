@@ -441,6 +441,15 @@ class TestCSV(unittest.TestCase):
             self.assertEqual(testcsvWithoutParams.annotation_related_images[imageIndex].image, testAnnotationRelatedImages[imageIndex].image)
             self.assertEqual(testcsvWithoutParams.annotation_related_images[imageIndex].deployment, testAnnotationRelatedImages[imageIndex].deployment)
 
+        # Remove any values in annotation related images list
+        testcsvWithoutParams.annotation_related_images = []
+        testcsvWithoutParams.csv['spec']['install']['spec']['deployments'][0]['spec']['template']['metadata'].pop('annotations')
+
+        # Call function to populate all images
+        testcsvWithoutParams._get_related_images()
+
+        self.assertEqual(len(testcsvWithoutParams.annotation_related_images), 0)
+        
     def test__update_operator_container_images(self):
         testcsvWithoutParams = ClusterServiceVersion(DUMMY_CSV)
         testDummyContainers = []

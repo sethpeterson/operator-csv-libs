@@ -1,0 +1,2 @@
+[run]
+omit = operator_csv_libs/tests/*
