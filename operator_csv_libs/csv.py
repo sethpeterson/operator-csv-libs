@@ -10,6 +10,7 @@ def _literal_presenter(dumper, data):
 class ClusterServiceVersion:
     LATEST_IMAGE_INDICATOR   = '-latest'
     RELATED_IMAGE_IDENTIFIER = 'olm.relatedImage.'
+    TAGGED_RELATED_IMAGE_IDENTIFIER = 'olm.tag.relatedImage.'
 
     def __init__(self, csv, name=None, target_version=None, replaces=None, skiprange=None, logger=None):
         self.original_csv = csv
@@ -46,6 +47,7 @@ class ClusterServiceVersion:
             self._setup_basic_logger()
 
         # Extract some other useful info
+        self._manipulate_tag_images()
         self._get_operator_images()
         self._get_related_images()
 
@@ -270,6 +272,20 @@ class ClusterServiceVersion:
                         image       = d['spec']['template']['metadata']['annotations'][a]
                     )
                     self.annotation_related_images.append(o)
+
+    def _manipulate_tag_images(self):
+        taggedImages = {}
+        for d in self.csv['spec']['install']['spec']['deployments']:
+            if not 'annotations' in d['spec']['template']['metadata']:
+                continue
+            for a in d['spec']['template']['metadata']['annotations']:
+                if a.startswith(self.TAGGED_RELATED_IMAGE_IDENTIFIER):
+                    taggedImages[a.replace(self.TAGGED_RELATED_IMAGE_IDENTIFIER, self.RELATED_IMAGE_IDENTIFIER)] = d['spec']['template']['metadata']['annotations'][a]
+        for d in self.csv['spec']['install']['spec']['deployments']:
+            if not 'annotations' in d['spec']['template']['metadata']:
+                continue
+            for i in taggedImages:
+                d['spec']['template']['metadata']['annotations'][i] = taggedImages[i]
 
     def _update_operator_container_images(self):
         for image in self.operator_images:
