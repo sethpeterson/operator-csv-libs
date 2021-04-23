@@ -280,9 +280,10 @@ class ClusterServiceVersion:
                 continue
             for a in d['spec']['template']['metadata']['annotations']:
                 if a.startswith(self.TAGGED_RELATED_IMAGE_IDENTIFIER):
-                    # olm.relatedImage should take precedence over olm.tag.relatedImage so do not overwrite
-                    if not a.replace(self.TAGGED_RELATED_IMAGE_IDENTIFIER, self.RELATED_IMAGE_IDENTIFIER) in d['spec']['template']['metadata']['annotations']:
-                        taggedImages[a.replace(self.TAGGED_RELATED_IMAGE_IDENTIFIER, self.RELATED_IMAGE_IDENTIFIER)] = d['spec']['template']['metadata']['annotations'][a]
+                    relatedImageAnnotation = a.replace(self.TAGGED_RELATED_IMAGE_IDENTIFIER, self.RELATED_IMAGE_IDENTIFIER)
+                    # olm.relatedImage should take precedence over olm.tag.relatedImage so do not overwrite olm.relatedImage
+                    if not relatedImageAnnotation in d['spec']['template']['metadata']['annotations']:
+                        taggedImages[relatedImageAnnotation] = d['spec']['template']['metadata']['annotations'][a]
         for d in self.csv['spec']['install']['spec']['deployments']:
             if not 'annotations' in d['spec']['template']['metadata']:
                 continue
